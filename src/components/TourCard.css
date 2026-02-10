@@ -1,0 +1,89 @@
+.tour-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6);
+  background-color: var(--color-bg-default);
+  border: var(--border-width-xsmall) solid var(--color-border-default);
+  border-radius: var(--border-radius-xlarge);
+  width: 343px;
+}
+
+.tour-card__image {
+  width: 100%;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+}
+
+.tour-card__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.tour-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  align-items: flex-end;
+}
+
+.tour-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  width: 100%;
+}
+
+.tour-card__badges {
+  display: flex;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.tour-card__title {
+  font-size: var(--font-size-body-large);
+  font-weight: 700;
+  line-height: var(--line-height-body-large);
+  color: var(--color-content-primary);
+  margin: 0;
+}
+
+.tour-card__price {
+  font-size: var(--font-size-body-xsmall);
+  font-weight: 400;
+  line-height: var(--line-height-body-xsmall);
+  color: var(--color-content-tertiary);
+  margin: 0;
+}
+
+.tour-card__description {
+  font-size: var(--font-size-body-small);
+  font-weight: 400;
+  line-height: var(--line-height-body-small);
+  color: var(--color-content-secondary);
+  width: 100%;
+  margin: 0;
+}
+
+.tour-card__button {
+  width: 100%;
+  height: var(--button-height-small);
+  padding: var(--spacing-4) var(--spacing-5);
+  background-color: var(--color-bg-action-transparent);
+  border: var(--border-width-xsmall) solid var(--color-border-action-default);
+  border-radius: var(--border-radius-medium);
+  font-size: var(--font-size-cta-small);
+  font-weight: 700;
+  line-height: var(--line-height-cta-small);
+  letter-spacing: 0.12px;
+  color: var(--color-content-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tour-card__button:hover {
+  background-color: rgba(0, 24, 56, 0.04);
+  border-color: var(--color-content-primary);
+}

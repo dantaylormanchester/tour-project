@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery - Manchester City</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    /* Kippax Modern Font Faces - Same as Stadium Tours */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Rg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Md.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Bd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndRg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndMd.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndxBd.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBlk.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-content-primary: #001838;
+      --color-content-secondary: rgba(0, 24, 56, 0.8);
+      --color-content-tertiary: #69738c;
+      --color-content-disabled: #8898af;
+      --color-content-on-dark: #ffffff;
+      --color-content-on-light: #001838;
+      --color-content-core-primary: #348acb;
+      --color-content-status-success: #0d775d;
+      --color-bg-default: #ffffff;
+      --color-bg-base-white: #ffffff;
+      --color-bg-core-secondary: #98c5e9;
+      --color-bg-subtle-primary: #eef5fc;
+      --color-bg-action-transparent: rgba(255, 255, 255, 0);
+      --color-bg-status-success-subtle: #e8fdf6;
+      --color-bg-status-warning-subtle: #FFF8E1;
+      --color-bg-status-error-subtle: #FFEEF0;
+      --color-content-status-warning: #E65100;
+      --color-border-status-error: #DC2626;
+      --color-matchday-indicator: #FF00FF;
+      --color-border-default: #c8d4e0;
+      --color-border-contrast: #001838;
+      --color-border-subtle: #c9e0f3;
+      --color-border-action-default: #aab9cb;
+      --color-border-action-hover: #69738c;
+      --color-border-disabled: #dde6ed;
+      --color-border-status-success: #18c390;
+      --color-border-status-info: #3bd6ff;
+      --color-city-electric-blue: #3bd6ff;
+      --spacing-0: 0px;
+      --spacing-1: 2px;
+      --spacing-2: 4px;
+      --spacing-3: 6px;
+      --spacing-4: 8px;
+      --spacing-5: 12px;
+      --spacing-6: 16px;
+      --spacing-7: 20px;
+      --spacing-8: 24px;
+      --spacing-12: 56px;
+      --spacing-negative-4: -8px;
+      --font-family: 'Kippax Modern', sans-serif;
+      --font-size-hero-medium: 48px;
+      --font-size-hero-large: 60px;
+      --line-height-hero-large: 56px;
+      --font-size-body-large: 18px;
+      --font-size-body-medium: 16px;
+      --font-size-body-small: 14px;
+      --font-size-body-xsmall: 12px;
+      --font-size-body-xxsmall: 10px;
+      --font-size-label-medium: 14px;
+      --font-size-label-small: 10px;
+      --font-size-cta-medium: 14px;
+      --font-size-cta-small: 12px;
+      --line-height-hero-medium: 48px;
+      --line-height-body-large: 26px;
+      --line-height-body-medium: 24px;
+      --line-height-body-small: 24px;
+      --line-height-body-xsmall: 20px;
+      --line-height-body-xxsmall: 16px;
+      --line-height-label-medium: 20px;
+      --line-height-label-small: 16px;
+      --line-height-cta-medium: 20px;
+      --line-height-cta-small: 16px;
+      --border-radius-none: 0px;
+      --border-radius-small: 4px;
+      --border-radius-medium: 6px;
+      --border-radius-large: 8px;
+      --border-radius-xlarge: 12px;
+      --border-radius-round: 999px;
+      --border-width-xsmall: 1px;
+      --border-width-medium: 2px;
+      --button-height-small: 36px;
+      --button-height-medium: 44px;
+      --color-bg-action-brand-secondary-default: #18486d;
+      --color-content-accent-tertiary: #ee00dc;
+      --color-bg-electric-pink-50: #fdf2fc;
+      --blur-xsmall: 4px;
+      --color-bg-alpha-dark-blue-80: rgba(0, 24, 56, 0.8);
+      --color-bg-addon-button: #E0EBF5;
+      --shadow-dropdown: 0 2px 4px -2px rgba(0, 24, 56, 0.06), 0 8px 18px -3px rgba(0, 24, 56, 0.2);
+      --font-size-figma-body-medium: 15px;
+      --line-height-figma-body-medium: 24px;
+      --font-size-figma-body-small: 14px;
+      --line-height-figma-body-small: 24px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      overflow-x: hidden;
+      max-width: 375px;
+      margin: 0 auto;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--color-bg-base-white);
+    }
+
+    /* Header – same as Basket and Stadium Tours */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: var(--spacing-0) var(--spacing-6);
+      background-color: var(--color-bg-core-secondary);
+      position: relative;
+      z-index: 3;
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+    }
+
+    .header__burger {
+      display: flex;
+      align-items: center;
+      width: 86px;
+    }
+
+    .header__menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .header__menu-icon {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .header__menu-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+    }
+
+    .header__logo {
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      display: block;
+      text-decoration: none;
+    }
+
+    .header__actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .header__basket {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-2);
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: var(--border-radius-round);
+      background: linear-gradient(140.753deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.16) 100%);
+      position: relative;
+      gap: var(--spacing-5);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header__basket-icon {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-content-primary);
+    }
+
+    .header__basket-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header__basket-number {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2px;
+      font-family: var(--font-family);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-content-on-dark);
+      pointer-events: none;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 500px;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--spacing-8);
+      overflow: hidden;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 24, 56, 0) 0%, rgba(0, 24, 56, 0.8) 100%);
+      z-index: 1;
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      color: var(--color-content-on-dark);
+      width: 100%;
+    }
+
+    .hero__title {
+      font-size: var(--font-size-hero-large);
+      font-weight: 800;
+      line-height: var(--line-height-hero-large);
+      letter-spacing: -1px;
+      color: var(--color-content-on-dark);
+      font-family: var(--font-family);
+      font-stretch: condensed;
+      margin-bottom: var(--spacing-4);
+      text-transform: uppercase;
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-on-dark);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .hero__description {
+      font-size: var(--font-size-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-on-dark);
+      opacity: 0.95;
+    }
+
+    /* Experience Cards */
+    .experiences {
+      padding: var(--spacing-8) var(--spacing-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+    }
+
+    .experiences__intro {
+      margin-bottom: var(--spacing-4);
+    }
+
+    .experiences__intro-heading {
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-primary);
+      margin-bottom: 6px;
+    }
+
+    .experiences__intro-description {
+      font-size: var(--font-size-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+    }
+
+    .experience-card {
+      position: relative;
+      border-radius: var(--border-radius-xlarge);
+      overflow: hidden;
+      width: 100%;
+      height: 343px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .experience-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 24, 56, 0) 0%, rgba(0, 24, 56, 0) 35%, rgba(0, 24, 56, 0.7) 65%, rgba(0, 24, 56, 0.95) 100%);
+    }
+
+    /* Same as Stadium Tours .badge.badge--small */
+    .experience-card__badge {
+      position: absolute;
+      top: var(--spacing-6);
+      left: var(--spacing-6);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      padding: var(--spacing-1) var(--spacing-3);
+      height: 24px;
+      border-radius: var(--border-radius-small);
+      background-color: var(--color-bg-subtle-primary);
+      font-family: var(--font-family);
+      font-size: var(--font-size-label-small);
+      font-weight: 500;
+      line-height: var(--line-height-label-medium);
+      letter-spacing: 0.12px;
+      color: var(--color-content-core-primary);
+    }
+
+    .experience-card__badge--popular {
+      background-color: var(--color-bg-subtle-primary);
+      color: var(--color-content-core-primary);
+    }
+
+    .experience-card__badge--new {
+      background-color: var(--color-bg-subtle-primary);
+      color: var(--color-content-core-primary);
+    }
+
+    .experience-card__badge--opening-soon {
+      background-color: var(--color-bg-electric-pink-50);
+      color: var(--color-content-accent-tertiary);
+    }
+
+    .experience-card__content {
+      position: relative;
+      z-index: 2;
+      padding: var(--spacing-8) var(--spacing-6);
+      color: var(--color-content-on-dark);
+    }
+
+    .experience-card__title {
+      font-size: 31pt;
+      font-weight: 700;
+      line-height: 40px;
+      color: var(--color-content-on-dark);
+      font-family: var(--font-family);
+      font-stretch: condensed;
+      margin-bottom: 12px;
+      text-transform: none;
+    }
+
+    .experience-card__price {
+      font-size: 12pt;
+      font-weight: 700;
+      line-height: 18px;
+      color: var(--color-city-electric-blue);
+      margin-bottom: var(--spacing-5);
+    }
+
+    .experience-card__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--button-height-medium);
+      padding: var(--spacing-5) var(--spacing-6);
+      background-color: var(--color-bg-action-brand-secondary-default);
+      color: var(--color-content-on-dark);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-medium);
+      font-weight: 700;
+      line-height: var(--line-height-cta-medium);
+      letter-spacing: 0;
+      width: 100%;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .experience-card__button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function computeBasketCount() {
+      try {
+        const booking = sessionStorage.getItem('stadiumToursLastBooking');
+        const addOnsRaw = sessionStorage.getItem('stadiumToursAddOns');
+        const addOns = addOnsRaw ? JSON.parse(addOnsRaw) : {};
+        const bookingData = booking ? JSON.parse(booking) : null;
+        const participantCount = Number(bookingData?.participantTotal) || 0;
+        const addOnCount = Object.values(addOns).reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+        return Math.max(0, participantCount + addOnCount);
+      } catch (_) {
+        return 0;
+      }
+    }
+
+    function App() {
+      const [basketCount, setBasketCount] = useState(() => computeBasketCount());
+
+      useEffect(() => {
+        function updateCount() {
+          setBasketCount(computeBasketCount());
+        }
+        updateCount();
+        window.addEventListener('storage', updateCount);
+        return () => window.removeEventListener('storage', updateCount);
+      }, []);
+      const experiences = [
+        {
+          id: 1,
+          title: 'Stadium tours',
+          price: 'From £22',
+          badge: 'Most popular',
+          badgeType: 'popular',
+          image: '/assets/1.png',
+          buttonText: 'Discover'
+        },
+        {
+          id: 2,
+          title: 'Museum Tour',
+          price: 'From £22',
+          badge: 'New',
+          badgeType: 'new',
+          image: '/assets/2.png',
+          buttonText: 'Discover'
+        },
+        {
+          id: 3,
+          title: 'Altitude Roof Walk',
+          price: 'From £22',
+          badge: 'New',
+          badgeType: 'new',
+          image: '/assets/3.JPG',
+          buttonText: 'Discover'
+        },
+        {
+          id: 4,
+          title: 'Zip Wire',
+          price: null,
+          badge: 'Opening soon',
+          badgeType: 'opening-soon',
+          image: '/assets/4.jpg.webp',
+          buttonText: 'More info'
+        }
+      ];
+
+      return (
+        <div className="app">
+          <header className="header">
+            <div className="header__burger">
+              <button className="header__menu-btn" aria-label="Open menu">
+                <div className="header__menu-icon">
+                  <img src="/assets/c16f303c4d01145625249e67fdfa0f7bbf9aa0a9.svg" alt="" />
+                </div>
+              </button>
+            </div>
+            
+            <a href="stadium-tours.html" className="header__logo" aria-label="Back to Stadium Tours">
+              <img src="/assets/logo.svg" alt="Manchester City FC" width="48" height="48" />
+            </a>
+            
+            <div className="header__actions">
+              <a href="basket.html" className="header__basket" aria-label={basketCount > 0 ? `Shopping basket, ${basketCount} item${basketCount !== 1 ? 's' : ''}` : 'Shopping basket'}>
+                <div className="header__basket-icon">
+                  <img src="/assets/basket.svg" alt="" className="header__basket-img" />
+                  {basketCount > 0 && (
+                    <span className="header__basket-number" aria-hidden="true">{basketCount > 99 ? '99+' : basketCount}</span>
+                  )}
+                </div>
+              </a>
+            </div>
+          </header>
+
+          {/* Hero Section */}
+          <section className="hero">
+            <video
+              src="/assets/tours-hero-new.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+            <div className="hero__overlay"></div>
+            <div className="hero__content">
+              <h1 className="hero__title">EXPERIENCES</h1>
+            </div>
+          </section>
+
+          {/* Experience Cards */}
+          <section className="experiences">
+            <div className="experiences__intro">
+              <h2 className="experiences__intro-heading">Discover Manchester City's newest experiences</h2>
+              <p className="experiences__intro-description">
+                Discover Manchester City's newest experiences with an unforgettable visit to the Etihad Campus. Go behind the scenes with a stadium and museum tour, then take things to new heights with the thrilling Altitude roof walk, offering stunning views across Manchester, before finishing with an adrenaline-pumping zip wire for the ultimate City adventure.
+              </p>
+            </div>
+            {experiences.map(experience => (
+              <div 
+                key={experience.id} 
+                className="experience-card"
+                style={{ backgroundImage: `url(${experience.image})` }}
+              >
+                <div className="experience-card__overlay"></div>
+                <div className={`experience-card__badge experience-card__badge--${experience.badgeType}`}>
+                  {experience.badge}
+                </div>
+                <div className="experience-card__content">
+                  <h3 className="experience-card__title">{experience.title}</h3>
+                  {experience.price && (
+                    <p className="experience-card__price">{experience.price}</p>
+                  )}
+                  {experience.buttonText === 'Discover' ? (
+                    <a href="stadium-tours.html" className="experience-card__button">
+                      {experience.buttonText}
+                    </a>
+                  ) : (
+                    <button className="experience-card__button">
+                      {experience.buttonText}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </section>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

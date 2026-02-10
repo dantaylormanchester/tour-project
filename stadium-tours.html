@@ -1,0 +1,3625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stadium Tours</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    /* Kippax Modern - Regular */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Rg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Medium */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Md.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Bold */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Bd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Condensed Regular */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndRg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Condensed Medium */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndMd.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Condensed Bold */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Condensed Extra Bold (FOR STADIUM TOURS TITLE) */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndxBd.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    
+    /* Kippax Modern - Condensed Black */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBlk.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-content-primary: #001838;
+      --color-content-secondary: rgba(0, 24, 56, 0.8);
+      --color-content-tertiary: #69738c;
+      --color-content-disabled: #8898af;
+      --color-content-on-dark: #ffffff;
+      --color-content-on-light: #001838;
+      --color-content-core-primary: #348acb;
+      --color-content-status-success: #0d775d;
+      --color-bg-default: #ffffff;
+      --color-bg-base-white: #ffffff;
+      --color-bg-core-secondary: #98c5e9;
+      --color-bg-subtle-primary: #eef5fc;
+      --color-bg-action-transparent: rgba(255, 255, 255, 0);
+      --color-bg-action-brand-secondary-hover: #c9e0f3;
+      --color-bg-status-success-subtle: #e8fdf6;
+      --color-bg-status-warning-subtle: #FFF8E1;
+      --color-bg-status-error-subtle: #FFEEF0;
+      --color-content-status-warning: #E65100;
+      --color-border-status-error: #DC2626;
+      --color-matchday-indicator: #FF00FF;
+      --color-border-default: #c8d4e0;
+      --color-border-contrast: #001838;
+      --color-border-subtle: #c9e0f3;
+      --color-border-action-default: #aab9cb;
+      --color-border-action-hover: #69738c;
+      --color-border-disabled: #dde6ed;
+      --color-border-status-success: #18c390;
+      --color-border-status-info: #3bd6ff;
+      --color-city-electric-blue: #3bd6ff;
+      --spacing-0: 0px;
+      --spacing-1: 2px;
+      --spacing-2: 4px;
+      --spacing-3: 6px;
+      --spacing-4: 8px;
+      --spacing-5: 12px;
+      --spacing-6: 16px;
+      --spacing-7: 20px;
+      --spacing-8: 24px;
+      --spacing-12: 56px;
+      --spacing-negative-4: -8px;
+      --font-family: 'Kippax Modern', sans-serif;
+      --font-size-hero-medium: 48px;
+      --font-size-body-large: 18px;
+      --font-size-body-medium: 16px;
+      --font-size-body-small: 14px;
+      --font-size-body-xsmall: 12px;
+      --font-size-body-xxsmall: 10px;
+      --font-size-label-medium: 14px;
+      --font-size-label-small: 10px;
+      --font-size-cta-medium: 14px;
+      --font-size-cta-small: 12px;
+      --line-height-hero-medium: 48px;
+      --line-height-body-large: 26px;
+      --line-height-body-medium: 24px;
+      --line-height-body-small: 24px;
+      --line-height-body-xsmall: 20px;
+      --line-height-body-xxsmall: 16px;
+      --line-height-label-medium: 20px;
+      --line-height-label-small: 16px;
+      --line-height-cta-medium: 20px;
+      --line-height-cta-small: 16px;
+      --border-radius-none: 0px;
+      --border-radius-small: 4px;
+      --border-radius-medium: 6px;
+      --border-radius-large: 8px;
+      --border-radius-xlarge: 12px;
+      --border-radius-round: 999px;
+      --border-width-xsmall: 1px;
+      --border-width-medium: 2px;
+      --button-height-small: 36px;
+      --blur-xsmall: 4px;
+      --loading-spinner-size: 80px;
+      --color-bg-alpha-dark-blue-80: rgba(0, 24, 56, 0.8);
+      --color-bg-addon-button: #E0EBF5;
+      --shadow-dropdown: 0 2px 4px -2px rgba(0, 24, 56, 0.06), 0 8px 18px -3px rgba(0, 24, 56, 0.2);
+      /* Figma design system – font/size/body/medium: 15, body/small: 14, body/xsmall: 12 */
+      --font-size-figma-body-medium: 15px;
+      --line-height-figma-body-medium: 24px;
+      --font-size-figma-body-small: 14px;
+      --line-height-figma-body-small: 24px;
+    }
+
+    body {
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      overflow-x: hidden;
+      width: 375px;
+      max-width: 375px;
+      margin: 0 auto;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--color-bg-base-white);
+      width: 375px;
+      max-width: 375px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: var(--spacing-0) var(--spacing-6);
+      background-color: var(--color-bg-core-secondary);
+      position: relative;
+      z-index: 3;
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+    }
+
+    .header__burger {
+      display: flex;
+      align-items: center;
+      width: 86px;
+    }
+
+    .header__menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    
+    .header__menu-icon {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .header__menu-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+    }
+
+    .header__logo {
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      display: block;
+      text-decoration: none;
+    }
+
+    .header__actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .header__basket {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-2);
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: var(--border-radius-round);
+      background: linear-gradient(140.753deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.16) 100%);
+      position: relative;
+      gap: var(--spacing-5);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header__basket-icon {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-content-primary);
+    }
+
+    .header__basket-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header__basket-number {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2px;
+      font-family: var(--font-family);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-content-on-dark);
+      pointer-events: none;
+    }
+
+    .app__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      padding: var(--spacing-8) var(--spacing-6);
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+      align-items: flex-start;
+    }
+
+    .app__header-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .app__section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      margin-left: var(--spacing-negative-4);
+    }
+
+    .breadcrumb__link {
+      display: flex;
+      align-items: center;
+      padding: var(--spacing-2) var(--spacing-4);
+      background-color: var(--color-bg-action-transparent);
+      border-radius: var(--border-radius-small);
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-tertiary);
+      transition: background-color 0.2s, color 0.2s;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .breadcrumb__link:hover {
+      background-color: var(--color-bg-action-brand-secondary-hover);
+      color: var(--color-content-primary);
+    }
+
+    .breadcrumb__link--active {
+      color: var(--color-content-primary);
+    }
+
+    .breadcrumb__separator {
+      width: 16px;
+      height: 16px;
+      color: var(--color-content-tertiary);
+    }
+
+    .app__title {
+      font-family: var(--font-family);
+      font-size: var(--font-size-hero-medium);
+      font-weight: 800;
+      font-stretch: condensed;
+      line-height: var(--line-height-hero-medium);
+      letter-spacing: -0.48px;
+      text-transform: uppercase;
+      color: var(--color-content-primary);
+      margin: 0;
+      width: 100%;
+      font-feature-settings: 'salt' on;
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      width: 100%;
+      align-self: stretch;
+    }
+
+    .image-gallery__main {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      position: relative;
+      background: #f0f0f0;
+      padding: 0;
+      margin: 0;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+    }
+
+    .image-gallery__main:active {
+      cursor: grabbing;
+    }
+
+    .image-gallery__main img,
+    .image-gallery__main video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      margin: 0;
+      padding: 0;
+      border: none;
+      display: block;
+    }
+
+    .image-gallery__thumbnails {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .image-gallery__thumbnails::-webkit-scrollbar {
+      display: none;
+    }
+
+    .image-gallery__thumbnail {
+      padding: 4px;
+      border-radius: var(--border-radius-large);
+      border: 2px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .image-gallery__thumbnail--active {
+      border-color: var(--color-border-contrast);
+    }
+
+    .image-gallery__thumbnail img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: var(--border-radius-medium);
+      display: block;
+    }
+
+    .image-gallery__thumbnail:first-child {
+      margin-left: 0;
+    }
+
+    .app__description {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .app__description-paragraph {
+      margin: 0 0 var(--spacing-5) 0;
+    }
+
+    .app__description-paragraph:last-child {
+      margin-bottom: 0;
+    }
+
+    .app__features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-5);
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      padding: var(--spacing-0);
+      border-radius: var(--border-radius-small);
+    }
+
+    .badge__icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    
+    .badge__icon img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+
+    .badge__text {
+      font-size: var(--font-size-label-medium);
+      font-weight: 500;
+      line-height: var(--line-height-label-medium);
+      letter-spacing: 0.12px;
+      color: var(--color-content-primary);
+    }
+
+    .badge--small {
+      background-color: var(--color-bg-subtle-primary);
+      padding: var(--spacing-1) var(--spacing-3);
+      height: 24px;
+    }
+
+    .badge--small .badge__text {
+      font-size: var(--font-size-label-small);
+      color: var(--color-content-core-primary);
+    }
+
+    .divider {
+      width: 0;
+      height: 20px;
+    }
+
+    .divider__line {
+      width: 1px;
+      height: 20px;
+      background-color: var(--color-border-default);
+    }
+
+    .app__discount-alert {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--spacing-5);
+      padding: var(--spacing-5);
+      background-color: var(--color-bg-status-success-subtle);
+      border: var(--border-width-xsmall) solid var(--color-border-status-success);
+      border-radius: var(--border-radius-medium);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .app__discount-content {
+      display: flex;
+      gap: var(--spacing-5);
+      align-items: center;
+      flex: 1;
+    }
+
+    .app__discount-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .app__discount-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+      margin: 0 0 var(--spacing-2) 0;
+    }
+
+    .app__discount-link {
+      font-size: var(--font-size-cta-small);
+      font-weight: 700;
+      line-height: var(--line-height-cta-small);
+      letter-spacing: 0.12px;
+      color: var(--color-content-primary);
+      text-decoration: underline;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .booking-widget {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      padding: var(--spacing-6);
+      background-color: var(--color-bg-subtle-primary);
+      border: var(--border-width-xsmall) solid var(--color-border-subtle);
+      border-radius: var(--border-radius-large);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      align-self: center;
+      overflow: visible;
+    }
+
+    .booking-widget__price-label {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 400;
+      line-height: var(--line-height-body-xsmall);
+      color: var(--color-content-secondary);
+      margin: 0;
+    }
+
+    .booking-widget__price-value {
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .booking-widget__inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      overflow: visible;
+    }
+
+    .booking-widget__input {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--button-height-small);
+      padding: var(--spacing-3) var(--spacing-4);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-medium);
+      width: 100%;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+
+    .booking-widget__input-content {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .booking-widget__input-icon {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      color: var(--color-content-primary);
+    }
+
+    .booking-widget__input-text {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--color-content-primary);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .booking-widget__alert {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-bg-status-error-subtle);
+      border: var(--border-width-xsmall) solid var(--color-border-status-error);
+      border-radius: var(--border-radius-large);
+      width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .booking-widget__alert-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .booking-widget__alert-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .booking-widget__alert-text {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      flex: 1;
+    }
+
+    .booking-widget__submit {
+      width: 100%;
+      height: var(--button-height-small);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-content-primary);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-small);
+      font-weight: 700;
+      line-height: var(--line-height-cta-small);
+      letter-spacing: 0.12px;
+      color: var(--color-content-on-dark);
+      cursor: pointer;
+    }
+
+    .booking-widget__cancellation {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .booking-widget__cancellation-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .booking-widget__cancellation-title {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 700;
+      line-height: var(--line-height-body-xsmall);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .booking-widget__cancellation-desc {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 400;
+      line-height: var(--line-height-body-xsmall);
+      color: var(--color-content-secondary);
+      margin: 0;
+    }
+
+    .tour-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      padding: var(--spacing-6);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-xlarge);
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 0;
+      align-self: center;
+      transition: border 0.2s ease;
+    }
+
+    .tour-card--expanded {
+      border: var(--border-width-medium) solid var(--color-border-status-info);
+    }
+
+    .tour-card__image {
+      width: 100%;
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      position: relative;
+    }
+
+    .tour-card__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .tour-card__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      width: 100%;
+    }
+
+    .tour-card__top {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-5);
+      width: 100%;
+    }
+
+    .tour-card__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+      width: 100%;
+    }
+
+    .tour-card__title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-4);
+      width: 100%;
+    }
+
+    .tour-card__title-row .tour-card__title {
+      flex: 1;
+      margin: 0;
+    }
+
+    .tour-card__expand-btn {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--color-content-primary);
+    }
+
+    .tour-card__expand-btn svg {
+      transition: transform 0.2s ease;
+    }
+
+    .tour-card__expand-btn[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .tour-card__header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-5);
+      width: 100%;
+    }
+
+    .tour-card__badges {
+      display: flex;
+      gap: var(--spacing-4);
+      align-items: center;
+    }
+
+    .tour-card__title {
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .tour-card__price {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 400;
+      line-height: var(--line-height-body-xsmall);
+      color: var(--color-content-tertiary);
+      margin: 0;
+    }
+
+    .tour-card__description {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-secondary);
+      margin: 0;
+    }
+
+    .tour-card__button {
+      width: 100%;
+      height: var(--button-height-small);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-bg-action-transparent);
+      border: var(--border-width-xsmall) solid var(--color-border-action-default);
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-small);
+      font-weight: 700;
+      color: var(--color-content-primary);
+      cursor: pointer;
+    }
+
+    .widget-divider {
+      width: 100%;
+      height: 1px;
+      background-color: var(--color-border-default);
+    }
+
+    /* Date Picker Styles */
+    .date-picker {
+      position: relative;
+      width: 100%;
+    }
+
+    .date-picker__calendar {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: var(--border-width-xsmall) solid var(--color-content-primary);
+      border-radius: var(--border-radius-medium);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: var(--spacing-6);
+      z-index: 1000;
+    }
+
+    .date-picker__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-6);
+    }
+
+    .date-picker__nav-btn {
+      background: none;
+      border: none;
+      padding: var(--spacing-2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-content-primary);
+    }
+
+    .date-picker__nav-btn svg {
+      width: 17px;
+      height: 24px;
+    }
+
+    .date-picker__month-year {
+      font-size: var(--font-size-body-small);
+      font-weight: 700;
+      color: var(--color-content-primary);
+    }
+
+    .date-picker__weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--spacing-2);
+      margin-bottom: var(--spacing-5);
+    }
+
+    .date-picker__weekday {
+      text-align: center;
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 600;
+      color: var(--color-content-tertiary);
+      padding: var(--spacing-2);
+    }
+
+    .date-picker__days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--spacing-2);
+      row-gap: var(--spacing-2);
+    }
+
+    .date-picker__day {
+      aspect-ratio: 1;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: var(--font-size-body-xsmall);
+      color: var(--color-content-primary);
+      border-radius: var(--border-radius-small);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .date-picker__day:hover:not(:disabled):not(.date-picker__day--selected) {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .date-picker__day--today {
+      border: 1px solid var(--color-city-electric-blue-500);
+    }
+
+    .date-picker__day--selected {
+      background-color: var(--color-content-primary) !important;
+      color: var(--color-city-electric-blue) !important;
+      font-weight: 600 !important;
+      border: none !important;
+    }
+
+    .date-picker__day--selected:hover {
+      background-color: var(--color-content-primary) !important;
+      color: var(--color-city-electric-blue) !important;
+    }
+
+    .date-picker__day:disabled {
+      color: var(--color-content-tertiary);
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .date-picker__matchday-label {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+      margin-bottom: var(--spacing-5);
+    }
+
+    .date-picker__matchday-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--color-matchday-indicator);
+      flex-shrink: 0;
+    }
+
+    .date-picker__matchday-text {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 500;
+      color: var(--color-content-primary);
+    }
+
+    .date-picker__matchday-info {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--color-content-tertiary);
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+      margin-left: var(--spacing-1);
+    }
+
+    .date-picker__matchday-info svg {
+      width: 100%;
+      height: 100%;
+      color: var(--color-content-tertiary);
+    }
+
+    .date-picker__day--matchday {
+      position: relative;
+    }
+
+    .date-picker__day--matchday::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-matchday-indicator);
+      z-index: 1;
+    }
+
+    /* Participants Picker */
+    .participants-picker {
+      position: relative;
+      width: 100%;
+    }
+
+    .participants-picker__dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: white;
+      border: var(--border-width-xsmall) solid var(--color-content-primary);
+      border-radius: var(--border-radius-medium);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: var(--spacing-7);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+    }
+
+    .participants-picker__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .participants-picker__label {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      padding-right: var(--spacing-6);
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .participants-picker__label-text {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      color: #001838;
+      line-height: var(--line-height-body-small);
+    }
+
+    .participants-picker__label-price {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      color: #69738c;
+      line-height: var(--line-height-body-small);
+    }
+
+    .participants-picker__controls {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-1);
+    }
+
+    .participants-picker__btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-medium);
+      border: 1px solid #aab9cb;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: var(--spacing-4);
+      color: var(--color-content-primary);
+      transition: all 0.2s;
+    }
+
+    .participants-picker__btn:hover:not(:disabled) {
+      background-color: var(--color-bg-subtle-primary);
+      border-color: var(--color-city-electric-blue-500);
+    }
+
+    .participants-picker__btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      color: var(--color-content-tertiary);
+    }
+
+    .participants-picker__count {
+      min-width: 36px;
+      min-height: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: 24px;
+      border: 0;
+      border-radius: var(--border-radius-medium);
+      color: var(--color-content-primary);
+    }
+
+    /* Loading Overlay */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-6);
+      opacity: 0;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .loading-overlay__backdrop {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(var(--blur-xsmall));
+      background-color: var(--color-bg-alpha-dark-blue-80);
+    }
+
+    .loading-overlay__content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-8);
+      min-width: 280px;
+    }
+
+    .loading-overlay__spinner {
+      width: var(--loading-spinner-size);
+      height: var(--loading-spinner-size);
+      flex-shrink: 0;
+      color: var(--color-city-electric-blue);
+    }
+
+    .loading-overlay__spinner svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .loading-overlay__text-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-2);
+      text-align: center;
+    }
+
+    .loading-overlay__title {
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+      color: white;
+      margin: 0;
+    }
+
+    .loading-overlay__description {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    /* Available Tours View */
+    .available-tours {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      width: 100%;
+      margin-top: var(--spacing-7);
+    }
+
+    .available-tours__heading {
+      font-size: var(--font-size-body-medium);
+      font-weight: 500;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .available-tours__tabs {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .available-tours__tab-group {
+      display: flex;
+      gap: 0;
+      align-items: center;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-bottom: 1px solid var(--color-border-default);
+      width: 100%;
+    }
+
+    .available-tours__tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-4) var(--spacing-6);
+      padding-bottom: var(--spacing-5);
+      border-bottom: 1px solid var(--color-border-default);
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      cursor: pointer;
+      white-space: nowrap;
+      font-size: var(--font-size-body-medium);
+      font-weight: 500;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-tertiary);
+      transition: all 0.2s ease;
+    }
+
+    .available-tours__tab:hover {
+      color: var(--color-content-primary);
+    }
+
+    .available-tours__tab--active {
+      border-bottom: 2px solid var(--color-border-contrast);
+      color: var(--color-content-primary);
+      font-weight: 700;
+    }
+
+    .available-tours__cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      margin-top: var(--spacing-6);
+    }
+
+    .available-tours__cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+    }
+
+    .tour-card__show-times {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+      margin-top: var(--spacing-4);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      text-align: left;
+    }
+
+    .tour-card__show-times-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .tour-card__show-times-icon--expanded {
+      transform: rotate(180deg);
+    }
+
+    .tour-card__times-wrapper {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease-out;
+    }
+
+    .tour-card__times-wrapper--expanded {
+      max-height: 1000px;
+      transition: max-height 0.4s ease-in;
+    }
+
+    .tour-card__times-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-top: var(--spacing-5);
+      padding: var(--spacing-6);
+      background-color: var(--color-bg-subtle-primary);
+      border: var(--border-width-xsmall) solid var(--color-border-subtle);
+      border-radius: var(--border-radius-large);
+    }
+
+    .tour-card__availability {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-3);
+    }
+
+    .tour-card__availability-label {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .tour-card__availability-badges {
+      display: flex;
+      gap: var(--spacing-5);
+    }
+
+    .tour-card__availability-badge {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+
+    .tour-card__availability-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tour-card__availability-indicator--good {
+      background-color: #6FCF97;
+    }
+
+    .tour-card__availability-indicator--low {
+      background-color: #F2994A;
+    }
+
+    .tour-card__availability-indicator--none {
+      background-color: #BDBDBD;
+    }
+
+    .tour-card__availability-text {
+      font-size: var(--font-size-label-medium);
+      font-weight: 500;
+      line-height: var(--line-height-label-medium);
+      color: var(--color-content-primary);
+      letter-spacing: 0.14px;
+    }
+
+    .tour-card__time-selection {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      margin-top: var(--spacing-6);
+    }
+
+    .tour-card__time-selection-label {
+      font-size: var(--font-size-body-xsmall);
+      font-weight: 500;
+      line-height: var(--line-height-body-xsmall);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .tour-card__time-dropdown-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .tour-card__time-dropdown-trigger {
+      width: 100%;
+      height: 44px;
+      padding: var(--spacing-4) var(--spacing-5);
+      padding-right: 40px;
+      font-size: var(--font-size-figma-body-medium);
+      font-family: var(--font-family);
+      font-weight: 500;
+      color: var(--color-content-primary);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-subtle);
+      border-radius: var(--border-radius-large);
+      cursor: pointer;
+      appearance: none;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23001838' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-5) center;
+    }
+
+    .tour-card__time-dropdown-trigger:hover {
+      border-color: var(--color-border-action-hover);
+    }
+
+    .tour-card__time-dropdown-panel {
+      position: absolute;
+      top: calc(100% + var(--spacing-2));
+      left: 0;
+      right: 0;
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-subtle);
+      border-radius: var(--border-radius-large);
+      box-shadow: 0 4px 12px rgba(0, 24, 56, 0.12);
+      z-index: 10;
+      overflow: hidden;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .tour-card__time-dropdown-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--spacing-4) var(--spacing-5);
+      font-size: var(--font-size-body-medium);
+      font-weight: 500;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+      gap: var(--spacing-5);
+    }
+
+    .tour-card__time-dropdown-option:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .tour-card__low-availability-badge {
+      flex-shrink: 0;
+      padding: var(--spacing-2) var(--spacing-4);
+      font-size: var(--font-size-body-xxsmall);
+      font-weight: 500;
+      line-height: var(--line-height-body-xxsmall);
+      color: var(--color-content-status-warning);
+      background-color: var(--color-bg-status-warning-subtle);
+      border-radius: var(--border-radius-round);
+      letter-spacing: 0.2px;
+    }
+
+    .tour-card__times {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-4);
+      width: 100%;
+    }
+
+    .tour-card__time-slot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-2);
+      flex: 0 1 calc((100% - var(--spacing-4)) / 2);
+      min-width: 0;
+      max-width: calc((100% - var(--spacing-4)) / 2);
+      box-sizing: border-box;
+      height: 40px;
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-subtle);
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tour-card__time-slot:hover:not(:disabled) {
+      background-color: var(--color-bg-subtle-primary);
+      border-color: var(--color-border-subtle);
+    }
+
+    .tour-card__time-slot--none {
+      border-color: var(--color-border-disabled);
+      color: var(--color-content-disabled);
+      cursor: not-allowed;
+    }
+
+    .tour-card__time-slot--selected {
+      background-color: var(--color-content-primary);
+      border: var(--border-width-xsmall) solid rgba(255, 255, 255, 0.4);
+      color: var(--color-content-on-dark);
+    }
+
+    .tour-card__time-slot--selected .tour-card__time-indicator--good {
+      background-color: #6FCF97;
+    }
+
+    .tour-card__time-slot--selected .tour-card__time-indicator--low {
+      background-color: #F2994A;
+    }
+
+
+    .tour-card__time-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tour-card__time-indicator--good {
+      background-color: #6FCF97;
+    }
+
+    .tour-card__time-indicator--low {
+      background-color: #F2994A;
+    }
+
+    .tour-card__time-indicator--none {
+      background-color: #BDBDBD;
+    }
+
+    .tour-card__booking-summary {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: var(--spacing-6);
+    }
+
+    .tour-card__price-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .tour-card__price-item-text {
+      font-size: var(--font-size-body-xxsmall);
+      font-weight: 500;
+      line-height: var(--line-height-body-xxsmall);
+      color: var(--color-content-tertiary);
+    }
+
+    .tour-card__total-price {
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-primary);
+    }
+
+    .tour-card__book-button {
+      width: 100%;
+      height: 44px;
+      margin-top: var(--spacing-6);
+      padding: var(--spacing-5) var(--spacing-6);
+      background: linear-gradient(90deg, var(--color-city-electric-blue) 50%, rgb(26, 180, 246) 100%);
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-medium);
+      font-weight: 700;
+      line-height: var(--line-height-cta-medium);
+      color: var(--color-content-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .tour-card__book-button:hover {
+      opacity: 0.9;
+    }
+
+    .tour-card__alert {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: #FFF8E1;
+      border: var(--border-width-xsmall) solid #FF9800;
+      border-radius: var(--border-radius-medium);
+      width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .tour-card__alert-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tour-card__alert-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .tour-card__alert-text {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      flex: 1;
+    }
+
+    .addons-sheet__intro {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-secondary);
+      margin: 0 0 var(--spacing-5) 0;
+    }
+
+    .addons-sheet__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .addons-sheet__item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      padding: var(--spacing-6) 0;
+      background-color: var(--color-bg-default);
+      border-radius: var(--border-radius-large);
+    }
+
+    .addons-sheet__item-top {
+      display: flex;
+      gap: var(--spacing-6);
+      align-items: flex-start;
+    }
+
+    .addons-sheet__item-image-wrap {
+      width: 96px;
+      min-width: 96px;
+      height: 96px;
+      background-color: var(--color-city-electric-blue);
+      border-radius: var(--border-radius-large);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .addons-sheet__item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .addons-sheet__item-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .addons-sheet__item-title {
+      font-size: var(--font-size-figma-body-medium);
+      font-weight: 700;
+      line-height: var(--line-height-figma-body-medium);
+      color: var(--color-content-primary);
+      margin: 0 0 var(--spacing-3) 0;
+    }
+
+    .addons-sheet__item-description {
+      font-size: var(--font-size-figma-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-figma-body-small);
+      color: var(--color-content-secondary);
+      margin: 0 0 var(--spacing-5) 0;
+    }
+
+    .addons-sheet__item-price {
+      font-size: var(--font-size-figma-body-small);
+      font-weight: 600;
+      line-height: var(--line-height-figma-body-small);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .addons-sheet__add-btn {
+      width: 100%;
+      height: var(--button-height-small);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-bg-addon-button);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-small);
+      font-weight: 700;
+      line-height: var(--line-height-cta-small);
+      color: var(--color-content-primary);
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
+
+    .addons-sheet__add-btn:hover {
+      opacity: 0.9;
+    }
+
+    .addons-sheet__quantity {
+      margin-top: var(--spacing-3);
+      padding: var(--spacing-3) var(--spacing-4);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-body-small);
+      font-family: var(--font-family);
+      color: var(--color-content-primary);
+      background-color: var(--color-bg-default);
+    }
+
+    .addons-sheet__quantity-trigger {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 44px;
+      padding: var(--spacing-5) var(--spacing-6);
+      padding-right: 40px;
+      font-size: var(--font-size-figma-body-medium);
+      font-family: var(--font-family);
+      font-weight: 500;
+      line-height: var(--line-height-figma-body-medium);
+      color: var(--color-content-primary);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-large);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23001838' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-5) center;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .addons-sheet__quantity-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin-top: var(--spacing-2);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-large);
+      box-shadow: var(--shadow-dropdown);
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .addons-sheet__quantity-option {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: var(--spacing-5) var(--spacing-6);
+      font-size: var(--font-size-figma-body-medium);
+      font-family: var(--font-family);
+      font-weight: 500;
+      color: var(--color-content-primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .addons-sheet__quantity-option:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .addons-sheet__quantity-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .addons-sheet__action-btn {
+      width: 100%;
+      height: 44px;
+      padding: var(--spacing-5) var(--spacing-6);
+      background: linear-gradient(90deg, var(--color-city-electric-blue) 50%, rgb(26, 180, 246) 100%);
+      border-radius: var(--border-radius-medium);
+      font-size: var(--font-size-cta-medium);
+      font-weight: 700;
+      line-height: var(--line-height-cta-medium);
+      color: var(--color-content-on-light);
+      cursor: pointer;
+      border: none;
+    }
+
+    .addons-sheet__action-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Info Sheet Overlay */
+    .info-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      background-color: rgba(0, 24, 56, 0.5);
+      z-index: 2000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .info-sheet-overlay--addons {
+      max-width: 100%;
+    }
+
+    .info-sheet {
+      width: 375px;
+      max-width: 375px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background-color: var(--color-bg-default);
+      border-radius: var(--border-radius-xlarge) var(--border-radius-xlarge) 0 0;
+      padding: var(--spacing-6);
+      padding-bottom: calc(var(--spacing-6) + var(--spacing-8));
+      box-sizing: border-box;
+      animation: slideUp 0.35s ease-in-out;
+    }
+
+    .info-sheet--addons {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      height: 95vh;
+      max-height: 95vh;
+    }
+
+    .addons-sheet__scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--spacing-6);
+      padding-bottom: var(--spacing-5);
+    }
+
+    .addons-sheet__footer {
+      flex-shrink: 0;
+      padding: var(--spacing-6);
+      padding-top: var(--spacing-5);
+      background-color: var(--color-bg-default);
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(0); }
+      to { transform: translateY(100%); }
+    }
+
+    .info-sheet--closing {
+      animation: slideDown 0.35s ease-in-out forwards;
+    }
+
+    .info-sheet__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-5);
+    }
+
+    /* Make add-ons header sticky within the scroll area */
+    .info-sheet.info-sheet--addons .addons-sheet__scroll {
+      position: relative;
+      /* Remove top padding so header sits flush with the sheet's top edge */
+      padding: 0 var(--spacing-6) var(--spacing-5);
+    }
+
+    .info-sheet.info-sheet--addons .info-sheet__header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      /* Visually extend to the card edges horizontally */
+      margin: 0 calc(-1 * var(--spacing-6)) var(--spacing-5);
+      padding: var(--spacing-6) var(--spacing-6) var(--spacing-5);
+      background-color: var(--color-bg-default);
+    }
+
+    .info-sheet__title {
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .info-sheet__close {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: var(--spacing-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-content-primary);
+      border-radius: var(--border-radius-medium);
+    }
+
+    .info-sheet__close:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .info-sheet__image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: var(--border-radius-medium);
+      margin-bottom: var(--spacing-5);
+    }
+
+    .info-sheet__badges {
+      display: flex;
+      gap: var(--spacing-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-5);
+    }
+
+    .info-sheet__badge {
+      padding: var(--spacing-2) var(--spacing-3);
+      background-color: var(--color-bg-subtle-primary);
+      border-radius: var(--border-radius-small);
+      font-size: var(--font-size-label-small);
+      font-weight: 500;
+      line-height: var(--line-height-label-small);
+      color: var(--color-content-core-primary);
+    }
+
+    .info-sheet__text {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      margin: 0 0 var(--spacing-5) 0;
+    }
+
+    .info-sheet__text:last-child {
+      margin-bottom: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useRef, useEffect, useMemo } = React;
+
+    function DatePicker({ value, onChange, placeholder }) {
+      const [isOpen, setIsOpen] = useState(false);
+      const [currentDate, setCurrentDate] = useState(new Date());
+      const datePickerRef = useRef(null);
+      
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 
+                      'July', 'August', 'September', 'October', 'November', 'December'];
+      const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      
+      const getDaysInMonth = (date) => {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDayOfWeek = firstDay.getDay();
+        
+        return { daysInMonth, startingDayOfWeek };
+      };
+      
+      const handlePrevMonth = () => {
+        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+      };
+      
+      const handleNextMonth = () => {
+        setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+      };
+      
+      const handleDayClick = (day) => {
+        const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        onChange(selectedDate);
+        setIsOpen(false);
+      };
+      
+      const { daysInMonth, startingDayOfWeek } = getDaysInMonth(currentDate);
+      const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+      const emptyDays = Array.from({ length: startingDayOfWeek }, (_, i) => i);
+      
+      const today = new Date();
+      const isToday = (day) => {
+        return day === today.getDate() && 
+               currentDate.getMonth() === today.getMonth() && 
+               currentDate.getFullYear() === today.getFullYear();
+      };
+      
+      const isSelected = (day) => {
+        if (!value) return false;
+        return day === value.getDate() && 
+               currentDate.getMonth() === value.getMonth() && 
+               currentDate.getFullYear() === value.getFullYear();
+      };
+
+      const isMatchday = (day) => {
+        // Match days: 7th, 16th, and 28th of each month
+        return day === 7 || day === 16 || day === 28;
+      };
+
+      const isPastDate = (day) => {
+        const dateToCheck = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        dateToCheck.setHours(0, 0, 0, 0);
+        return dateToCheck < today;
+      };
+      
+      const formatDate = (date) => {
+        if (!date) return placeholder;
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'short' });
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+      };
+
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (datePickerRef.current && !datePickerRef.current.contains(event.target)) {
+            setIsOpen(false);
+          }
+        };
+        
+        if (isOpen) {
+          document.addEventListener('mousedown', handleClickOutside);
+        }
+        
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isOpen]);
+      
+      return (
+        <div className="date-picker" ref={datePickerRef}>
+          <button 
+            className="booking-widget__input" 
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+          >
+            <div className="booking-widget__input-content">
+              <div className="booking-widget__input-icon">
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                  <rect x="3" y="4" width="11" height="10" rx="1" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M3 7H14M6 3V5M11 3V5" stroke="currentColor" strokeWidth="1.5"/>
+                </svg>
+              </div>
+              <span className="booking-widget__input-text">{formatDate(value)}</span>
+            </div>
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <path d="M5 7L8.5 10.5L12 7" stroke="currentColor" strokeWidth="1.5"/>
+            </svg>
+          </button>
+          
+          {isOpen && (
+            <div className="date-picker__calendar">
+              <div className="date-picker__matchday-label">
+                <div className="date-picker__matchday-indicator"></div>
+                <span className="date-picker__matchday-text">Matchday</span>
+                <button className="date-picker__matchday-info" type="button" aria-label="Matchday information">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7.5" stroke="currentColor" strokeWidth="1"/>
+                    <text x="8" y="11" textAnchor="middle" fontSize="10" fill="currentColor" fontWeight="bold">?</text>
+                  </svg>
+                </button>
+              </div>
+              <div className="date-picker__header">
+                <button className="date-picker__nav-btn" onClick={handlePrevMonth} type="button" aria-label="Previous month">
+                  <svg width="17" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                </button>
+                <div className="date-picker__month-year">
+                  {months[currentDate.getMonth()]} {currentDate.getFullYear()}
+                </div>
+                <button className="date-picker__nav-btn" onClick={handleNextMonth} type="button" aria-label="Next month">
+                  <svg width="17" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 6l6 6-6 6"/>
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="date-picker__weekdays">
+                {weekdays.map(day => (
+                  <div key={day} className="date-picker__weekday">{day}</div>
+                ))}
+              </div>
+              
+              <div className="date-picker__days">
+                {emptyDays.map(i => (
+                  <div key={`empty-${i}`} />
+                ))}
+                {days.map(day => {
+                  const isPast = isPastDate(day);
+                  return (
+                    <button
+                      key={day}
+                      className={`date-picker__day ${isSelected(day) ? 'date-picker__day--selected' : ''} ${isToday(day) && !isSelected(day) ? 'date-picker__day--today' : ''} ${isMatchday(day) ? 'date-picker__day--matchday' : ''}`}
+                      onClick={() => !isPast && handleDayClick(day)}
+                      disabled={isPast}
+                      type="button"
+                    >
+                      {day}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function ParticipantsPicker({ value, onChange, placeholder }) {
+      const [isOpen, setIsOpen] = useState(false);
+      const dropdownRef = useRef(null);
+      
+      const participantTypes = [
+        { key: 'adults', label: 'Adult', price: '£22.00' },
+        { key: 'under16', label: 'Under 16', price: '£16.00' },
+        { key: 'senior', label: 'Senior (65+)', price: '£12.00' },
+        { key: 'student', label: 'Student', price: '£12.00' },
+        { key: 'under5', label: 'Under 5', price: '£0.00' }
+      ];
+
+      const handleIncrement = (type) => {
+        onChange({
+          ...value,
+          [type]: (value[type] || 0) + 1
+        });
+      };
+      
+      const handleDecrement = (type) => {
+        if (value[type] > 0) {
+          onChange({
+            ...value,
+            [type]: value[type] - 1
+          });
+        }
+      };
+      
+      const getTotalCount = () => {
+        return participantTypes.reduce((sum, type) => sum + (value[type.key] || 0), 0);
+      };
+      
+      const pluralizeLabel = (label, count) => {
+        if (count <= 1) return label;
+        
+        // Handle special cases
+        if (label === 'Adult') return 'Adults';
+        if (label === 'Student') return 'Students';
+        if (label.startsWith('Senior')) return label; // "Senior (65+)" stays same
+        if (label.startsWith('Under')) return label; // "Under 16", "Under 5" stay same
+        if (label.startsWith('Family')) return label; // Family options stay same
+        
+        return label;
+      };
+      
+      const formatParticipants = () => {
+        const selected = participantTypes
+          .filter(type => (value[type.key] || 0) > 0)
+          .map(type => {
+            const count = value[type.key];
+            const label = pluralizeLabel(type.label, count);
+            return `${count} ${label}`;
+          });
+        
+        if (selected.length === 0) return placeholder;
+        return selected.join(', ');
+      };
+      
+      // Close dropdown when clicking outside
+      useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setIsOpen(false);
+          }
+        };
+        
+        if (isOpen) {
+          document.addEventListener('mousedown', handleClickOutside);
+        }
+        
+        return () => {
+          document.removeEventListener('mousedown', handleClickOutside);
+        };
+      }, [isOpen]);
+      
+      return (
+        <div className="participants-picker" ref={dropdownRef}>
+          <button 
+            className="booking-widget__input" 
+            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+          >
+            <div className="booking-widget__input-content">
+              <div className="booking-widget__input-icon">
+                <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                  <path d="M8.5 8.5C10.1569 8.5 11.5 7.15685 11.5 5.5C11.5 3.84315 10.1569 2.5 8.5 2.5C6.84315 2.5 5.5 3.84315 5.5 5.5C5.5 7.15685 6.84315 8.5 8.5 8.5Z" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M14.5 14.5C14.5 12.0147 11.7614 10 8.5 10C5.23858 10 2.5 12.0147 2.5 14.5" stroke="currentColor" strokeWidth="1.5"/>
+                </svg>
+              </div>
+              <span className="booking-widget__input-text">{formatParticipants()}</span>
+            </div>
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <path d="M5 7L8.5 10.5L12 7" stroke="currentColor" strokeWidth="1.5"/>
+            </svg>
+          </button>
+          
+          {isOpen && (
+            <div className="participants-picker__dropdown">
+              {participantTypes.map((type) => (
+                <div key={type.key} className="participants-picker__row">
+                  <div className="participants-picker__label">
+                    <span className="participants-picker__label-text">{type.label}</span>
+                    <span className="participants-picker__label-price">{type.price}</span>
+                  </div>
+                  <div className="participants-picker__controls">
+                    <button 
+                      className="participants-picker__btn"
+                      onClick={() => handleDecrement(type.key)}
+                      disabled={!value[type.key] || value[type.key] === 0}
+                      type="button"
+                    >
+                      −
+                    </button>
+                    <span className="participants-picker__count">{value[type.key] || 0}</span>
+                    <button 
+                      className="participants-picker__btn"
+                      onClick={() => handleIncrement(type.key)}
+                      type="button"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function LoadingOverlay({ title = 'Checking availability', description = 'This can take few moments to complete, please wait...' }) {
+      return (
+        <div className="loading-overlay">
+          <div className="loading-overlay__backdrop" />
+          <div className="loading-overlay__content">
+            <div className="loading-overlay__spinner" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none" role="img" aria-label="Loading">
+                <defs>
+                  <linearGradient id="loading-spinner-gradient" x1="10" y1="40" x2="70" y2="40" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#3bd6ff" stopOpacity="0.3"/>
+                    <stop offset="100%" stopColor="#3bd6ff" stopOpacity="1"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="40" cy="40" r="30" stroke="url(#loading-spinner-gradient)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="50 138">
+                  <animateTransform attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="0.9s" repeatCount="indefinite"/>
+                </circle>
+              </svg>
+            </div>
+            <div className="loading-overlay__text-content">
+              <p className="loading-overlay__title">{title}</p>
+              <p className="loading-overlay__description">{description}</p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const PARTICIPANT_PRICES = [
+      { key: 'adults', label: 'Adult', plural: 'Adults', price: 22 },
+      { key: 'under16', label: 'Under 16', plural: 'Under 16', price: 16 },
+      { key: 'senior', label: 'Senior (65+)', plural: 'Senior (65+)', price: 12 },
+      { key: 'student', label: 'Student', plural: 'Students', price: 12 },
+      { key: 'under5', label: 'Under 5', plural: 'Under 5', price: 0 }
+    ];
+
+    function AvailableTours({ selectedDate, participants, onMoreInfoClick, onBookNow }) {
+      const formatDateForTab = (date) => {
+        const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${days[date.getDay()]} ${date.getDate()} ${months[date.getMonth()]}`;
+      };
+
+      const getTabsFromSelectedDate = () => {
+        if (!selectedDate) return [];
+        const tabs = [];
+        const daysToShow = 3;
+        for (let i = -daysToShow; i <= daysToShow; i++) {
+          const d = new Date(selectedDate);
+          d.setDate(d.getDate() + i);
+          tabs.push(d);
+        }
+        return tabs;
+      };
+
+      const tabs = getTabsFromSelectedDate();
+      const tabLabels = tabs.map(d => formatDateForTab(d));
+      const initialSelectedTab = selectedDate ? formatDateForTab(selectedDate) : (tabLabels[Math.floor(tabLabels.length / 2)] || '');
+      const [selectedTab, setSelectedTab] = useState(initialSelectedTab);
+      const [expandedTour, setExpandedTour] = useState(null);
+      const [selectedTimeByTour, setSelectedTimeByTour] = useState({});
+      const [showTimeAlertByTour, setShowTimeAlertByTour] = useState({});
+      const activeTabRef = useRef(null);
+
+      const handleBookNowClick = (tour) => {
+        const tourId = tour.id;
+        if (selectedTimeByTour[tourId] === undefined) {
+          setShowTimeAlertByTour(prev => ({ ...prev, [tourId]: true }));
+          return;
+        }
+        setShowTimeAlertByTour(prev => ({ ...prev, [tourId]: false }));
+        const priceBreakdown = getPriceBreakdown();
+        const participantTotal = participants ? Object.values(participants).reduce((s, c) => s + (Number(c) || 0), 0) : 0;
+        const booking = {
+          tourId,
+          tourTitle: tour.title,
+          tourImage: tour.image,
+          dateLabel: selectedTab,
+          time: selectedTimeByTour[tourId],
+          priceBreakdown,
+          participantTotal,
+        };
+        onBookNow(booking);
+      };
+
+      const getPriceBreakdown = () => {
+        if (!participants) return { items: [], total: 0 };
+        return PARTICIPANT_PRICES.reduce((acc, type) => {
+          const count = participants[type.key] || 0;
+          if (count > 0) {
+            const lineTotal = count * type.price;
+            const label = count === 1 ? type.label : type.plural;
+            acc.items.push({ text: `${count} ${label} x £${lineTotal.toFixed(2)}`, lineTotal });
+            acc.total += lineTotal;
+          }
+          return acc;
+        }, { items: [], total: 0 });
+      };
+
+      // Seeded random for consistent results per tour/date
+      const seededRandom = (seed) => {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+      };
+
+      const getAvailableTimeSlotsForTour = (tour) => {
+        const seedBase = (tour.id * 1000) + (selectedTab || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+        const slots = tour.times.map((time, i) => {
+          const r = seededRandom(seedBase + i * 7);
+          const availability = r < 0.15 ? 'none' : r < 0.4 ? 'low' : 'good';
+          return { time, availability };
+        });
+        const available = slots.filter(s => s.availability !== 'none');
+        return available.sort((a, b) => a.time.localeCompare(b.time));
+      };
+
+      const getAllTimeSlotsForTour = (tour) => {
+        const seedBase = (tour.id * 1000) + (selectedTab || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+        return tour.times.map((time, i) => {
+          const r = seededRandom(seedBase + i * 7);
+          const availability = r < 0.15 ? 'none' : r < 0.4 ? 'low' : 'good';
+          return { time, availability };
+        }).sort((a, b) => a.time.localeCompare(b.time));
+      };
+
+      useEffect(() => {
+        if (selectedDate) {
+          setSelectedTab(formatDateForTab(selectedDate));
+        }
+      }, [selectedDate]);
+
+      useEffect(() => {
+        if (activeTabRef.current) {
+          activeTabRef.current.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        }
+      }, [selectedTab]);
+
+      const allTours = [
+        {
+          id: 1,
+          title: 'Manchester City Stadium tour',
+          price: 'From £26 per person',
+          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          image: '/assets/3.JPG',
+          badges: ['Most popular', '120 mins'],
+          times: ['09:00', '09:30', '10:30', '11:30', '12:00', '13:30', '15:00', '15:30', '16:00', '16:30']
+        },
+        {
+          id: 2,
+          title: 'Stadium and Academy Tour',
+          price: 'From £26 per person',
+          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          image: '/assets/1.png',
+          badges: ['120 mins'],
+          times: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
+        },
+        {
+          id: 3,
+          title: 'VIP Stadium Tour',
+          price: 'From £26 per person',
+          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          image: '/assets/4.jpg.webp',
+          badges: ['120 mins'],
+          times: ['09:30', '10:30', '11:30', '12:30', '13:30', '14:00', '15:00', '16:00', '17:00']
+        },
+        {
+          id: 4,
+          title: 'Walk with a Legend Tour',
+          price: 'From £26 per person',
+          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          image: '/assets/2.png',
+          badges: ['120 mins'],
+          times: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '16:30', '17:00']
+        },
+        {
+          id: 5,
+          title: 'Matchday Pitch-side Walking Tour',
+          price: 'From £26 per person',
+          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          image: '/assets/1.png',
+          badges: ['120 mins'],
+          times: ['09:00', '09:30', '10:30', '11:30', '12:00', '13:00', '14:30', '15:30', '16:30', '17:00']
+        }
+      ];
+
+      // Get tour IDs for a date - consistent pseudo-random per date
+      const getToursForDate = (dateLabel) => {
+        const hash = dateLabel.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+        const allIds = [1, 2, 3, 4, 5];
+        const count = Math.max(2, 2 + (hash % 4));
+        const order = allIds.map((id, i) => ((hash * (i + 1) + id) % 100));
+        const sorted = [...allIds].sort((a, b) => order[a - 1] - order[b - 1]);
+        return sorted.slice(0, count);
+      };
+
+      // Filter tours based on selected date
+      const availableTourIds = getToursForDate(selectedTab);
+      const tours = allTours.filter(tour => availableTourIds.includes(tour.id));
+
+      useEffect(() => {
+        if (tours.length > 0) {
+          setExpandedTour(tours[0].id);
+        }
+      }, [selectedTab]);
+
+      useEffect(() => {
+        setSelectedTimeByTour(prev => {
+          const next = { ...prev };
+          let changed = false;
+          tours.forEach(tour => {
+            const slots = getAvailableTimeSlotsForTour(tour);
+            if (slots.length > 0 && !prev[tour.id]) {
+              next[tour.id] = slots[0].time;
+              changed = true;
+            }
+          });
+          return changed ? next : prev;
+        });
+      }, [selectedTab]);
+
+      const toggleTimes = (tourId) => {
+        setExpandedTour(expandedTour === tourId ? null : tourId);
+      };
+
+      const selectTime = (tourId, timeString) => {
+        setSelectedTimeByTour(prev => ({ ...prev, [tourId]: timeString }));
+        setShowTimeAlertByTour(prev => ({ ...prev, [tourId]: false }));
+      };
+
+      const priceBreakdown = getPriceBreakdown();
+
+      return (
+        <div id="available-tours-section" className="available-tours">
+          <p className="available-tours__heading">Available tours:</p>
+          <div className="available-tours__tabs">
+            <div className="available-tours__tab-group">
+              {tabLabels.map(label => (
+                <button
+                  key={label}
+                  ref={selectedTab === label ? activeTabRef : null}
+                  className={`available-tours__tab ${selectedTab === label ? 'available-tours__tab--active' : ''}`}
+                  onClick={() => setSelectedTab(label)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="available-tours__cards">
+            {tours.map(tour => (
+              <div key={tour.id} className={`tour-card ${expandedTour === tour.id ? 'tour-card--expanded' : ''}`}>
+                <div className="tour-card__image">
+                  <img src={tour.image} alt={tour.title} />
+                </div>
+                <div className="tour-card__content">
+                  <div className="tour-card__top">
+                    <div className="tour-card__inner">
+                      <div className="tour-card__title-row">
+                        <h3 className="tour-card__title">{tour.title}</h3>
+                        <button
+                          type="button"
+                          className="tour-card__expand-btn"
+                          onClick={() => toggleTimes(tour.id)}
+                          aria-expanded={expandedTour === tour.id}
+                          aria-label={expandedTour === tour.id ? 'Collapse' : 'Expand'}
+                        >
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M7 10l5 5 5-5"/>
+                          </svg>
+                        </button>
+                      </div>
+                      <p className="tour-card__price">{tour.price}</p>
+                      <div className="tour-card__badges">
+                        {tour.badges.map((badge, index) => (
+                          <div key={index} className="badge badge--small">
+                            <span className="badge__text">{badge}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <p className="tour-card__description">
+                      {tour.description}
+                    </p>
+                  </div>
+
+                  <button className="tour-card__button" onClick={() => onMoreInfoClick(tour.title, tour.image)}>More info</button>
+                  
+                  <div className={`tour-card__times-wrapper ${expandedTour === tour.id ? 'tour-card__times-wrapper--expanded' : ''}`}>
+                    <div className="tour-card__times-section">
+                      <div className="tour-card__availability">
+                        <span className="tour-card__availability-label">Availability:</span>
+                        <div className="tour-card__availability-badges">
+                          <div className="tour-card__availability-badge">
+                            <span className="tour-card__availability-indicator tour-card__availability-indicator--good" aria-hidden="true" />
+                            <span className="tour-card__availability-text">Good</span>
+                          </div>
+                          <div className="tour-card__availability-badge">
+                            <span className="tour-card__availability-indicator tour-card__availability-indicator--low" aria-hidden="true" />
+                            <span className="tour-card__availability-text">Low</span>
+                          </div>
+                          <div className="tour-card__availability-badge">
+                            <span className="tour-card__availability-indicator tour-card__availability-indicator--none" aria-hidden="true" />
+                            <span className="tour-card__availability-text">None</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="tour-card__time-selection">
+                        <p className="tour-card__time-selection-label">Select a time:</p>
+                        <div className="tour-card__times" role="group" aria-label="Time slots">
+                          {getAllTimeSlotsForTour(tour).map(({ time, availability }) => {
+                            const isSelected = selectedTimeByTour[tour.id] === time;
+                            const isNone = availability === 'none';
+                            return (
+                              <button
+                                key={time}
+                                type="button"
+                                className={`tour-card__time-slot tour-card__time-slot--${availability} ${isSelected ? 'tour-card__time-slot--selected' : ''}`}
+                                onClick={() => !isNone && selectTime(tour.id, time)}
+                                disabled={isNone}
+                                aria-pressed={isSelected}
+                                aria-label={`${time}${isNone ? ', not available' : ''}`}
+                              >
+                                <span className={`tour-card__time-indicator tour-card__time-indicator--${availability}`} aria-hidden="true" />
+                                <span>{time}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      
+                      <div className="tour-card__booking-summary">
+                        <div className="tour-card__price-breakdown">
+                          {priceBreakdown.items.map((item, idx) => (
+                            <div key={idx} className="tour-card__price-item">
+                              <span className="tour-card__price-item-text">{item.text}</span>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="tour-card__total-price">£{priceBreakdown.total.toFixed(2)}</div>
+                      </div>
+
+                      {showTimeAlertByTour[tour.id] && (
+                        <div className="tour-card__alert">
+                          <div className="tour-card__alert-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M10 0L20 18H0L10 0Z" fill="#FF9800"/>
+                              <path d="M10 6V11M10 14V14.01" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                            </svg>
+                          </div>
+                          <span className="tour-card__alert-text">Please select a time slot to continue.</span>
+                        </div>
+                      )}
+                      
+                      <button 
+                        className="tour-card__book-button" 
+                        onClick={() => handleBookNowClick(tour)}
+                      >
+                        Book now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [selectedImage, setSelectedImage] = useState(0);
+      const galleryDragRef = useRef({ startX: null, hasMoved: false });
+      const [selectedDate, setSelectedDate] = useState(null);
+      const [participants, setParticipants] = useState({
+        adults: 0,
+        under16: 0,
+        senior: 0,
+        student: 0,
+        under5: 0
+      });
+      const [isLoading, setIsLoading] = useState(false);
+      const [showAvailableTours, setShowAvailableTours] = useState(false);
+      const [showDateAlert, setShowDateAlert] = useState(false);
+      const [alertMessage, setAlertMessage] = useState('');
+      const [infoSheetOpen, setInfoSheetOpen] = useState(false);
+      const [infoSheetClosing, setInfoSheetClosing] = useState(false);
+      const [infoSheetTitle, setInfoSheetTitle] = useState('VR Headset');
+      const [infoSheetImage, setInfoSheetImage] = useState('/assets/2d13d6259d735aa4a06eea171f2ccc740e485f17.png');
+      const [addOnsSheetOpen, setAddOnsSheetOpen] = useState(false);
+      const [addOnsSheetClosing, setAddOnsSheetClosing] = useState(false);
+      const [addonQuantityShown, setAddonQuantityShown] = useState({});
+      const [addonQuantities, setAddonQuantities] = useState({ 'photo-booklet': 1, 'photo-booklets-4': 1, 'guidebook': 1 });
+      const [addonQuantityOpen, setAddonQuantityOpen] = useState(null);
+      const addonQuantityRef = useRef(null);
+      const computeBasketCount = () => {
+        try {
+          const booking = sessionStorage.getItem('stadiumToursLastBooking');
+          const addOnsRaw = sessionStorage.getItem('stadiumToursAddOns');
+          const addOns = addOnsRaw ? JSON.parse(addOnsRaw) : {};
+          const bookingData = booking ? JSON.parse(booking) : null;
+          const participantCount = Number(bookingData?.participantTotal) || 0;
+          const addOnCount = Object.values(addOns).reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+          return Math.max(0, participantCount + addOnCount);
+        } catch (_) {
+          return 0;
+        }
+      };
+
+      const [basketCount, setBasketCount] = useState(() => computeBasketCount());
+
+      useEffect(() => {
+        const updateCount = () => setBasketCount(computeBasketCount());
+        updateCount();
+        window.addEventListener('storage', updateCount);
+        return () => window.removeEventListener('storage', updateCount);
+      }, []);
+
+      const ADD_ON_CONFIG = {
+        'photo-booklet': {
+          title: 'Souvenir Photo Booklet',
+          price: 15,
+          image: '/assets/1001159.png',
+        },
+        'photo-booklets-4': {
+          title: '4 Photo Booklets and All Digital Photos',
+          price: 45,
+          image: '/assets/1001160.png',
+        },
+        'guidebook': {
+          title: 'Souvenir Guidebook',
+          price: 45,
+          image: '/assets/1001226.jpg',
+        },
+        'vr-headset': {
+          title: 'VR Headset Experience',
+          price: 25,
+          image: '/assets/vr.jpg',
+        },
+      };
+
+      const updateStoredAddOnQuantity = (key, delta) => {
+        try {
+          if (!delta) return;
+          const raw = sessionStorage.getItem('stadiumToursAddOns');
+          const data = raw ? JSON.parse(raw) : {};
+          const cfg = ADD_ON_CONFIG[key];
+          if (!cfg) return;
+          const current = data[key]?.quantity || 0;
+          const next = Math.max(0, current + delta);
+          if (next === 0) {
+            delete data[key];
+          } else {
+            data[key] = { ...cfg, quantity: next };
+          }
+          sessionStorage.setItem('stadiumToursAddOns', JSON.stringify(data));
+        } catch (_) {}
+      };
+
+      useEffect(() => {
+        const handleClickOutside = (e) => {
+          if (addonQuantityRef.current && !addonQuantityRef.current.contains(e.target)) {
+            setAddonQuantityOpen(null);
+          }
+        };
+        if (addonQuantityOpen) {
+          document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+      }, [addonQuantityOpen]);
+
+      useEffect(() => {
+        if (window.location.hash === '#addons') {
+          setAddOnsSheetOpen(true);
+        }
+      }, []);
+      const [loadingConfig, setLoadingConfig] = useState({ title: 'Checking availability', description: 'This can take few moments to complete, please wait...' });
+
+      const handleBookNow = (booking) => {
+        try {
+          sessionStorage.setItem('stadiumToursLastBooking', JSON.stringify(booking));
+        } catch (_) {}
+        setLoadingConfig({ title: 'Adding to basket', description: 'Please wait...' });
+        setIsLoading(true);
+        setTimeout(() => {
+          setBasketCount(computeBasketCount());
+          setIsLoading(false);
+          setTimeout(() => {
+            setAddOnsSheetOpen(true);
+          }, 1000);
+        }, 3000);
+      };
+
+      // Check if participants have been selected
+      const hasParticipants = () => {
+        const total = Object.values(participants).reduce((sum, count) => sum + count, 0);
+        return total > 0;
+      };
+
+      const handleShowTours = () => {
+        const hasDate = !!selectedDate;
+        const hasSelectedParticipants = hasParticipants();
+        
+        // Validate that both date and participants are selected
+        if (!hasDate && !hasSelectedParticipants) {
+          setAlertMessage('Please Select a date and participants to continue.');
+          setShowDateAlert(true);
+          return;
+        }
+        
+        if (hasDate && !hasSelectedParticipants) {
+          setAlertMessage('Please Select Participants.');
+          setShowDateAlert(true);
+          return;
+        }
+        
+        if (!hasDate && hasSelectedParticipants) {
+          setAlertMessage('Please select a date to continue.');
+          setShowDateAlert(true);
+          return;
+        }
+        
+        // Both are selected, proceed
+        setShowDateAlert(false);
+        setLoadingConfig({ title: 'Checking availability', description: 'This can take few moments to complete, please wait...' });
+        setIsLoading(true);
+        // Simulate loading - you can replace this with actual API call
+        setTimeout(() => {
+          setIsLoading(false);
+          setShowAvailableTours(true);
+          // Smooth scroll to available tours section after a brief delay to ensure DOM update
+          setTimeout(() => {
+            const availableToursSection = document.getElementById('available-tours-section');
+            if (availableToursSection) {
+              const elementPosition = availableToursSection.getBoundingClientRect().top + window.pageYOffset;
+              const offsetPosition = elementPosition - 24; // 24px further up
+              
+              // Custom smooth scroll with slower speed
+              const startPosition = window.pageYOffset;
+              const distance = offsetPosition - startPosition;
+              const duration = 800; // Slower scroll (800ms instead of default ~500ms)
+              let start = null;
+              
+              function step(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                const percentage = Math.min(progress / duration, 1);
+                // Easing function for smooth animation
+                const ease = percentage < 0.5 
+                  ? 2 * percentage * percentage 
+                  : 1 - Math.pow(-2 * percentage + 2, 2) / 2;
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (progress < duration) {
+                  window.requestAnimationFrame(step);
+                }
+              }
+              
+              window.requestAnimationFrame(step);
+            }
+          }, 100);
+        }, 5000);
+      };
+
+      return (
+        <div className="app">
+          {/* Header */}
+          <header className="header">
+            <div className="header__burger">
+              <button className="header__menu-btn" aria-label="Open menu">
+                <div className="header__menu-icon">
+                  <img src="/assets/c16f303c4d01145625249e67fdfa0f7bbf9aa0a9.svg" alt="" />
+                </div>
+              </button>
+            </div>
+            
+            <a href="stadium-tours.html" className="header__logo" aria-label="Back to Stadium Tours">
+              <img src="/assets/logo.svg" alt="Manchester City FC" width="48" height="48" />
+            </a>
+            
+            <div className="header__actions">
+              <a href="basket.html" className="header__basket" aria-label={basketCount > 0 ? `Shopping basket, ${basketCount} item${basketCount !== 1 ? 's' : ''}` : 'Shopping basket'}>
+                <div className="header__basket-icon">
+                  <img src="/assets/basket.svg" alt="" className="header__basket-img" />
+                  {basketCount > 0 && (
+                    <span className="header__basket-number" aria-hidden="true">{basketCount > 99 ? '99+' : basketCount}</span>
+                  )}
+                </div>
+              </a>
+            </div>
+          </header>
+
+          {/* Main Content */}
+          <main className="app__content">
+            {/* Breadcrumb */}
+            {/* Header Section: Breadcrumb + Title */}
+            <div className="app__header-section">
+              <nav className="breadcrumb">
+                <a href="discovery.html" className="breadcrumb__link">Experiences</a>
+                <div className="breadcrumb__separator">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.5"/>
+                  </svg>
+                </div>
+                <button className="breadcrumb__link breadcrumb__link--active">Stadium Tours</button>
+              </nav>
+
+              {/* Hero Title */}
+              <h1 className="app__title">STADIUM TOURS</h1>
+            </div>
+
+            {/* Image Gallery */}
+            <div className="image-gallery">
+              <div 
+                className="image-gallery__main"
+                onPointerDown={(e) => {
+                  galleryDragRef.current = { startX: e.clientX, hasMoved: false };
+                }}
+                onPointerMove={(e) => {
+                  const ref = galleryDragRef.current;
+                  if (ref.startX === null) return;
+                  const dx = e.clientX - ref.startX;
+                  const threshold = 50;
+                  if (Math.abs(dx) >= threshold && !ref.hasMoved) {
+                    ref.hasMoved = true;
+                    setSelectedImage(prev => {
+                      const images = [
+                        '/assets/1.png',
+                        '/assets/2.png',
+                        '/assets/3.JPG',
+                        '/assets/4.jpg.webp',
+                        '/assets/1.png',
+                        '/assets/2.png',
+                        '/assets/3.JPG'
+                      ];
+                      if (dx > 0) return Math.max(0, prev - 1);
+                      return Math.min(images.length - 1, prev + 1);
+                    });
+                    galleryDragRef.current.startX = e.clientX;
+                  }
+                }}
+                onPointerUp={() => { galleryDragRef.current = { startX: null, hasMoved: false }; }}
+                onPointerLeave={() => { galleryDragRef.current = { startX: null, hasMoved: false }; }}
+                onPointerCancel={() => { galleryDragRef.current = { startX: null, hasMoved: false }; }}
+              >
+                {selectedImage === 0 ? (
+                  <video
+                    src="/assets/tours-hero-new.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    poster="/assets/1.png"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                ) : (
+                  <img 
+                    src={[
+                      '/assets/1.png',
+                      '/assets/2.png',
+                      '/assets/3.JPG',
+                      '/assets/4.jpg.webp',
+                      '/assets/1.png',
+                      '/assets/2.png',
+                      '/assets/3.JPG'
+                    ][selectedImage]} 
+                    alt="Stadium tour view" 
+                    draggable={false}
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
+              </div>
+              <div className="image-gallery__thumbnails">
+                {[
+                  '/assets/1.png',
+                  '/assets/2.png',
+                  '/assets/3.JPG',
+                  '/assets/4.jpg.webp',
+                  '/assets/1.png',
+                  '/assets/2.png',
+                  '/assets/3.JPG'
+                ].map((imgSrc, i) => (
+                  <button 
+                    key={i}
+                    className={`image-gallery__thumbnail ${i === selectedImage ? 'image-gallery__thumbnail--active' : ''}`}
+                    onClick={() => setSelectedImage(i)}
+                  >
+                    <img src={imgSrc} alt={`Thumbnail ${i + 1}`} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="app__section">
+              <div className="app__description">
+                <p className="app__description-paragraph">
+                  Immerse yourself in the City story on the Manchester City Stadium Tour. Visit areas of the Stadium not usually available to the public.
+                </p>
+                <p className="app__description-paragraph">
+                  Using the latest technology, dreams come true as you and your loved ones sit and interact with Pep Guardiola in the press room. Immerse yourself in the City Story as you walk out of the glass players' tunnel, sit in the seats in the dug outs and soak up the views of the stadium from pitchside! There is a surprise at every turn!
+                </p>
+              </div>
+
+              {/* Feature Badges */}
+              <div className="app__features">
+                <div className="badge">
+                  <div className="badge__icon">
+                    <img src="/assets/23e37c23a76e8ef28bb9d70bff0242e960add39f.svg" alt="" />
+                  </div>
+                  <span className="badge__text">Digital ticket</span>
+                </div>
+                
+                <div className="divider"><div className="divider__line"></div></div>
+                
+                <div className="badge">
+                  <div className="badge__icon">
+                    <img src="/assets/443511bfbd072eaac991c9b7a8daf69c7da57353.svg" alt="" />
+                  </div>
+                  <span className="badge__text">Wheelchair accessible</span>
+                </div>
+                
+                <div className="divider"><div className="divider__line"></div></div>
+                
+                <div className="badge">
+                  <div className="badge__icon">
+                    <img src="/assets/117669be691b2bcfe09229f434e56ca520bf038d.svg" alt="" />
+                  </div>
+                  <span className="badge__text">In-person guide</span>
+                </div>
+              </div>
+
+              {/* Discount Alert */}
+              <div className="app__discount-alert">
+                <div className="app__discount-content">
+                  <div className="app__discount-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="#0d775d" strokeWidth="2"/>
+                      <path d="M8 12L11 15L16 9" stroke="#0d775d" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="app__discount-title">Member's discounts applied at basket</p>
+                    <button className="app__discount-link">Sign in / Register</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Booking Widget */}
+            <div className="booking-widget">
+              <div>
+                <p className="booking-widget__price-label">from</p>
+                <p className="booking-widget__price-value">£22 per person</p>
+              </div>
+
+              <div className="booking-widget__inputs">
+                <DatePicker 
+                  value={selectedDate}
+                  onChange={(date) => {
+                    setSelectedDate(date);
+                    // Hide alert if both date and participants are now selected
+                    if (date && hasParticipants()) {
+                      setShowDateAlert(false);
+                    }
+                  }}
+                  placeholder="Select date"
+                />
+
+                <ParticipantsPicker
+                  value={participants}
+                  onChange={(newParticipants) => {
+                    setParticipants(newParticipants);
+                    // Hide alert if both date and participants are now selected
+                    const hasSelectedParticipants = Object.values(newParticipants).reduce((sum, count) => sum + count, 0) > 0;
+                    if (selectedDate && hasSelectedParticipants) {
+                      setShowDateAlert(false);
+                    }
+                  }}
+                  placeholder="Select participants"
+                />
+
+                <button className="booking-widget__submit" onClick={handleShowTours}>
+                  Show available tours
+                </button>
+
+                {showDateAlert && (
+                  <div className="booking-widget__alert">
+                    <div className="booking-widget__alert-icon">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="10" fill="var(--color-border-status-error)"/>
+                        <path d="M10 5v5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                        <circle cx="10" cy="14" r="1" fill="white"/>
+                      </svg>
+                    </div>
+                    <span className="booking-widget__alert-text">{alertMessage}</span>
+                  </div>
+                )}
+              </div>
+
+              <div className="widget-divider"></div>
+
+              <div className="booking-widget__cancellation">
+                <div className="booking-widget__cancellation-icon">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8.5" stroke="#0d775d" strokeWidth="1.5"/>
+                    <path d="M7 10L9 12L13 8" stroke="#0d775d" strokeWidth="1.5"/>
+                  </svg>
+                </div>
+                <div>
+                  <p className="booking-widget__cancellation-title">Free cancellation</p>
+                  <p className="booking-widget__cancellation-desc">Cancel up to 24 hours in advance for a full refund</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Available Tours Section */}
+            {showAvailableTours && <AvailableTours selectedDate={selectedDate} participants={participants} onMoreInfoClick={(title, image) => { setInfoSheetTitle(title); setInfoSheetImage(image || '/assets/2d13d6259d735aa4a06eea171f2ccc740e485f17.png'); setInfoSheetOpen(true); }} onBookNow={handleBookNow} />}
+
+            {/* Tour Cards */}
+            {!showAvailableTours && (
+              <>
+            {/* Tour Card 1: Manchester City Stadium tour */}
+            <div className="tour-card">
+              <div className="tour-card__image">
+                <img src="/assets/3.JPG" alt="Manchester City Stadium tour" />
+              </div>
+              <div className="tour-card__content">
+                <div className="tour-card__top">
+                  <div className="tour-card__inner">
+                    <h3 className="tour-card__title">Manchester City Stadium tour</h3>
+                    <p className="tour-card__price">From £26 per person</p>
+                    <div className="tour-card__badges">
+                      <div className="badge badge--small">
+                        <span className="badge__text">Most popular</span>
+                      </div>
+                      <div className="badge badge--small">
+                        <span className="badge__text">120 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="tour-card__description">
+                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                  </p>
+                </div>
+
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Manchester City Stadium tour'); setInfoSheetImage('/assets/3.JPG'); setInfoSheetOpen(true); }}>More info</button>
+              </div>
+            </div>
+
+            {/* Tour Card 2: Stadium and Academy Tour */}
+            <div className="tour-card">
+              <div className="tour-card__image">
+                <img src="/assets/1.png" alt="Stadium and Academy Tour" />
+              </div>
+              <div className="tour-card__content">
+                <div className="tour-card__top">
+                  <div className="tour-card__inner">
+                    <h3 className="tour-card__title">Stadium and Academy Tour</h3>
+                    <p className="tour-card__price">From £26 per person</p>
+                    <div className="tour-card__badges">
+                      <div className="badge badge--small">
+                        <span className="badge__text">120 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="tour-card__description">
+                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                  </p>
+                </div>
+
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Stadium and Academy Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>More info</button>
+              </div>
+            </div>
+
+            {/* Tour Card 3: VIP Stadium Tour */}
+            <div className="tour-card">
+              <div className="tour-card__image">
+                <img src="/assets/4.jpg.webp" alt="VIP Stadium Tour" />
+              </div>
+              <div className="tour-card__content">
+                <div className="tour-card__top">
+                  <div className="tour-card__inner">
+                    <h3 className="tour-card__title">VIP Stadium Tour</h3>
+                    <p className="tour-card__price">From £26 per person</p>
+                    <div className="tour-card__badges">
+                      <div className="badge badge--small">
+                        <span className="badge__text">120 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="tour-card__description">
+                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                  </p>
+                </div>
+
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('VIP Stadium Tour'); setInfoSheetImage('/assets/4.jpg.webp'); setInfoSheetOpen(true); }}>More info</button>
+              </div>
+            </div>
+
+            {/* Tour Card 4: Walk with a Legend Tour */}
+            <div className="tour-card">
+              <div className="tour-card__image">
+                <img src="/assets/2.png" alt="Walk with a Legend Tour" />
+              </div>
+              <div className="tour-card__content">
+                <div className="tour-card__top">
+                  <div className="tour-card__inner">
+                    <h3 className="tour-card__title">Walk with a Legend Tour</h3>
+                    <p className="tour-card__price">From £26 per person</p>
+                    <div className="tour-card__badges">
+                      <div className="badge badge--small">
+                        <span className="badge__text">120 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="tour-card__description">
+                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                  </p>
+                </div>
+
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Walk with a Legend Tour'); setInfoSheetImage('/assets/2.png'); setInfoSheetOpen(true); }}>More info</button>
+              </div>
+            </div>
+
+            {/* Tour Card 5: Matchday Pitch-side Walking Tour */}
+            <div className="tour-card">
+              <div className="tour-card__image">
+                <img src="/assets/1.png" alt="Matchday Pitch-side Walking Tour" />
+              </div>
+              <div className="tour-card__content">
+                <div className="tour-card__top">
+                  <div className="tour-card__inner">
+                    <h3 className="tour-card__title">Matchday Pitch-side Walking Tour</h3>
+                    <p className="tour-card__price">From £26 per person</p>
+                    <div className="tour-card__badges">
+                      <div className="badge badge--small">
+                        <span className="badge__text">120 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="tour-card__description">
+                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                  </p>
+                </div>
+
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Matchday Pitch-side Walking Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>More info</button>
+              </div>
+            </div>
+              </>
+            )}
+          </main>
+
+          {/* Info Sheet Overlay */}
+          {infoSheetOpen && (
+            <div className="info-sheet-overlay">
+              <div 
+                className={`info-sheet ${infoSheetClosing ? 'info-sheet--closing' : ''}`}
+                onAnimationEnd={() => {
+                  if (infoSheetClosing) {
+                    setInfoSheetOpen(false);
+                    setInfoSheetClosing(false);
+                    window.location.reload();
+                  }
+                }}
+              >
+                <div className="info-sheet__header">
+                  <h2 className="info-sheet__title">{infoSheetTitle}</h2>
+                  <button className="info-sheet__close" onClick={() => setInfoSheetClosing(true)} aria-label="Close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                  </button>
+                </div>
+                <img 
+                  className="info-sheet__image" 
+                  src={infoSheetImage} 
+                  alt={infoSheetTitle} 
+                />
+                <div className="info-sheet__badges">
+                  <span className="info-sheet__badge">Most Popular</span>
+                  <span className="info-sheet__badge">35% Off</span>
+                </div>
+                <p className="info-sheet__text">
+                  Manchester City Stadium Tour with Beyond the Blue Moon. An immersive virtual reality adventure offering a bold, futuristic journey through Manchester City&apos;s past, present, and future.
+                </p>
+                <p className="info-sheet__text">
+                  The experience is not permitted for children under 7. Children aged between 7-10 must be accompanied by an adult. Experience is subject to waiver. For more details.
+                </p>
+                <p className="info-sheet__text">
+                  Please note the VR experience must be bought as part of an add-on to one of our Stadium Tours. As you check out select the VR add on for the number of guests you are wanting to book on the experience.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Add-ons Sheet Overlay */}
+          {addOnsSheetOpen && (
+            <div className="info-sheet-overlay info-sheet-overlay--addons">
+              <div 
+                className={`info-sheet info-sheet--addons ${addOnsSheetClosing ? 'info-sheet--closing' : ''}`}
+                onAnimationEnd={() => {
+                  if (addOnsSheetClosing) {
+                    setAddOnsSheetOpen(false);
+                    setAddOnsSheetClosing(false);
+                    window.location.reload();
+                  }
+                }}
+              >
+                <div className="addons-sheet__scroll">
+                  <div className="info-sheet__header">
+                    <h2 className="info-sheet__title">Select your add-ons</h2>
+                    <button className="info-sheet__close" onClick={() => setAddOnsSheetClosing(true)} aria-label="Close">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <p className="addons-sheet__intro">Enhance your experience with these add-ons to your Tour.</p>
+                  <div className="addons-sheet__list">
+                  <div className="addons-sheet__item">
+                    <div className="addons-sheet__item-top">
+                      <div className="addons-sheet__item-image-wrap">
+                        <img className="addons-sheet__item-image" src="/assets/1001159.png" alt="Souvenir Photo Booklet" />
+                      </div>
+                      <div className="addons-sheet__item-content">
+                        <h3 className="addons-sheet__item-title">Souvenir Photo Booklet</h3>
+                        <p className="addons-sheet__item-description">Featuring memorable moments from your visit to the stadium.</p>
+                        <p className="addons-sheet__item-price">£15.00</p>
+                      </div>
+                    </div>
+                    {addonQuantityShown['photo-booklet'] ? (
+                      <div className="addons-sheet__quantity-wrap" ref={addonQuantityOpen === 'photo-booklet' ? addonQuantityRef : null}>
+                        <button 
+                          type="button"
+                          className="addons-sheet__quantity-trigger"
+                          onClick={() => setAddonQuantityOpen(addonQuantityOpen === 'photo-booklet' ? null : 'photo-booklet')}
+                        >
+                          {addonQuantities['photo-booklet']}
+                        </button>
+                        {addonQuantityOpen === 'photo-booklet' && (
+                          <div className="addons-sheet__quantity-dropdown">
+                            {[0, 1, 2, 3].map(n => (
+                              <button
+                                key={n}
+                                type="button"
+                                className="addons-sheet__quantity-option"
+                                onClick={() => {
+                                  const prevQ = addonQuantities['photo-booklet'];
+                                  setAddonQuantities(prev => ({ ...prev, 'photo-booklet': n }));
+                                  setAddonQuantityOpen(null);
+                                  if (n === 0) {
+                                    setAddonQuantityShown(prev => ({ ...prev, 'photo-booklet': false }));
+                                    setBasketCount(c => Math.max(0, c - prevQ));
+                                    updateStoredAddOnQuantity('photo-booklet', -prevQ);
+                                  } else {
+                                    const delta = n - prevQ;
+                                    setBasketCount(c => Math.max(0, c + delta));
+                                    updateStoredAddOnQuantity('photo-booklet', delta);
+                                  }
+                                }}
+                              >
+                                {n}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        className="addons-sheet__add-btn"
+                        onClick={() => {
+                          const q = addonQuantities['photo-booklet'] || 1;
+                          setAddonQuantities(prev => ({ ...prev, 'photo-booklet': q }));
+                          setAddonQuantityShown(prev => ({ ...prev, 'photo-booklet': true }));
+                          setBasketCount(c => c + q);
+                          updateStoredAddOnQuantity('photo-booklet', q);
+                        }}
+                      >
+                        Add to basket
+                      </button>
+                    )}
+                  </div>
+                  <div className="addons-sheet__item">
+                    <div className="addons-sheet__item-top">
+                      <div className="addons-sheet__item-image-wrap">
+                        <img className="addons-sheet__item-image" src="/assets/1001160.png" alt="4 Photo Booklets and All Digital Photos" />
+                      </div>
+                      <div className="addons-sheet__item-content">
+                        <h3 className="addons-sheet__item-title">4 Photo Booklets and All Digital Photos</h3>
+                        <p className="addons-sheet__item-description">Featuring memorable moments from your visit to the stadium.</p>
+                        <p className="addons-sheet__item-price">£45.00</p>
+                      </div>
+                    </div>
+                    {addonQuantityShown['photo-booklets-4'] ? (
+                      <div className="addons-sheet__quantity-wrap" ref={addonQuantityOpen === 'photo-booklets-4' ? addonQuantityRef : null}>
+                        <button 
+                          type="button"
+                          className="addons-sheet__quantity-trigger"
+                          onClick={() => setAddonQuantityOpen(addonQuantityOpen === 'photo-booklets-4' ? null : 'photo-booklets-4')}
+                        >
+                          {addonQuantities['photo-booklets-4']}
+                        </button>
+                        {addonQuantityOpen === 'photo-booklets-4' && (
+                          <div className="addons-sheet__quantity-dropdown">
+                            {[0, 1, 2, 3].map(n => (
+                              <button
+                                key={n}
+                                type="button"
+                                className="addons-sheet__quantity-option"
+                                onClick={() => {
+                                  const prevQ = addonQuantities['photo-booklets-4'];
+                                  setAddonQuantities(prev => ({ ...prev, 'photo-booklets-4': n }));
+                                  setAddonQuantityOpen(null);
+                                  if (n === 0) {
+                                    setAddonQuantityShown(prev => ({ ...prev, 'photo-booklets-4': false }));
+                                    setBasketCount(c => Math.max(0, c - prevQ));
+                                    updateStoredAddOnQuantity('photo-booklets-4', -prevQ);
+                                  } else {
+                                    const delta = n - prevQ;
+                                    setBasketCount(c => Math.max(0, c + delta));
+                                    updateStoredAddOnQuantity('photo-booklets-4', delta);
+                                  }
+                                }}
+                              >
+                                {n}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        className="addons-sheet__add-btn"
+                        onClick={() => {
+                          const q = addonQuantities['photo-booklets-4'] || 1;
+                          setAddonQuantities(prev => ({ ...prev, 'photo-booklets-4': q }));
+                          setAddonQuantityShown(prev => ({ ...prev, 'photo-booklets-4': true }));
+                          setBasketCount(c => c + q);
+                          updateStoredAddOnQuantity('photo-booklets-4', q);
+                        }}
+                      >
+                        Add to basket
+                      </button>
+                    )}
+                  </div>
+                  <div className="addons-sheet__item">
+                    <div className="addons-sheet__item-top">
+                      <div className="addons-sheet__item-image-wrap">
+                        <img className="addons-sheet__item-image" src="/assets/1001226.jpg" alt="Souvenir Guidebook" />
+                      </div>
+                      <div className="addons-sheet__item-content">
+                        <h3 className="addons-sheet__item-title">Souvenir Guidebook</h3>
+                        <p className="addons-sheet__item-description">Souvenir Guidebook featuring stunning images of the Etihad Stadium.</p>
+                        <p className="addons-sheet__item-price">£45.00</p>
+                      </div>
+                    </div>
+                    {addonQuantityShown['guidebook'] ? (
+                      <div className="addons-sheet__quantity-wrap" ref={addonQuantityOpen === 'guidebook' ? addonQuantityRef : null}>
+                        <button 
+                          type="button"
+                          className="addons-sheet__quantity-trigger"
+                          onClick={() => setAddonQuantityOpen(addonQuantityOpen === 'guidebook' ? null : 'guidebook')}
+                        >
+                          {addonQuantities['guidebook']}
+                        </button>
+                        {addonQuantityOpen === 'guidebook' && (
+                          <div className="addons-sheet__quantity-dropdown">
+                            {[0, 1, 2, 3].map(n => (
+                              <button
+                                key={n}
+                                type="button"
+                                className="addons-sheet__quantity-option"
+                                onClick={() => {
+                                  const prevQ = addonQuantities['guidebook'];
+                                  setAddonQuantities(prev => ({ ...prev, 'guidebook': n }));
+                                  setAddonQuantityOpen(null);
+                                  if (n === 0) {
+                                    setAddonQuantityShown(prev => ({ ...prev, 'guidebook': false }));
+                                    setBasketCount(c => Math.max(0, c - prevQ));
+                                    updateStoredAddOnQuantity('guidebook', -prevQ);
+                                  } else {
+                                    const delta = n - prevQ;
+                                    setBasketCount(c => Math.max(0, c + delta));
+                                    updateStoredAddOnQuantity('guidebook', delta);
+                                  }
+                                }}
+                              >
+                                {n}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        className="addons-sheet__add-btn"
+                        onClick={() => {
+                          const q = addonQuantities['guidebook'] || 1;
+                          setAddonQuantities(prev => ({ ...prev, 'guidebook': q }));
+                          setAddonQuantityShown(prev => ({ ...prev, 'guidebook': true }));
+                          setBasketCount(c => c + q);
+                          updateStoredAddOnQuantity('guidebook', q);
+                        }}
+                      >
+                        Add to basket
+                      </button>
+                    )}
+                  </div>
+                  <div className="addons-sheet__item">
+                    <div className="addons-sheet__item-top">
+                      <div className="addons-sheet__item-image-wrap">
+                        <img className="addons-sheet__item-image" src="/assets/vr.jpg" alt="VR Headset Experience" />
+                      </div>
+                      <div className="addons-sheet__item-content">
+                        <h3 className="addons-sheet__item-title">VR Headset Experience</h3>
+                        <p className="addons-sheet__item-description">Immersive 360° stadium experience.</p>
+                        <p className="addons-sheet__item-price">£25.00</p>
+                      </div>
+                    </div>
+                    {addonQuantityShown['vr-headset'] ? (
+                      <div className="addons-sheet__quantity-wrap" ref={addonQuantityOpen === 'vr-headset' ? addonQuantityRef : null}>
+                        <button 
+                          type="button"
+                          className="addons-sheet__quantity-trigger"
+                          onClick={() => setAddonQuantityOpen(addonQuantityOpen === 'vr-headset' ? null : 'vr-headset')}
+                        >
+                          {addonQuantities['vr-headset']}
+                        </button>
+                        {addonQuantityOpen === 'vr-headset' && (
+                          <div className="addons-sheet__quantity-dropdown">
+                            {[0, 1, 2, 3].map(n => (
+                              <button
+                                key={n}
+                                type="button"
+                                className="addons-sheet__quantity-option"
+                                onClick={() => {
+                                  const prevQ = addonQuantities['vr-headset'];
+                                  setAddonQuantities(prev => ({ ...prev, 'vr-headset': n }));
+                                  setAddonQuantityOpen(null);
+                                  if (n === 0) {
+                                    setAddonQuantityShown(prev => ({ ...prev, 'vr-headset': false }));
+                                    setBasketCount(c => Math.max(0, c - prevQ));
+                                    updateStoredAddOnQuantity('vr-headset', -prevQ);
+                                  } else {
+                                    const delta = n - prevQ;
+                                    setBasketCount(c => Math.max(0, c + delta));
+                                    updateStoredAddOnQuantity('vr-headset', delta);
+                                  }
+                                }}
+                              >
+                                {n}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <button
+                        className="addons-sheet__add-btn"
+                        onClick={() => {
+                          const q = addonQuantities['vr-headset'] || 1;
+                          setAddonQuantities(prev => ({ ...prev, 'vr-headset': q }));
+                          setAddonQuantityShown(prev => ({ ...prev, 'vr-headset': true }));
+                          setBasketCount(c => c + q);
+                          updateStoredAddOnQuantity('vr-headset', q);
+                        }}
+                      >
+                        Add to basket
+                      </button>
+                    )}
+                  </div>
+                </div>
+                </div>
+                <div className="addons-sheet__footer">
+                  <button
+                    className="addons-sheet__action-btn"
+                    type="button"
+                    onClick={() => { window.location.href = 'basket.html'; }}
+                  >
+                    Continue to basket
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Loading Overlay */}
+          {isLoading && <LoadingOverlay title={loadingConfig.title} description={loadingConfig.description} />}
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

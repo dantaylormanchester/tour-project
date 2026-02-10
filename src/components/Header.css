@@ -1,0 +1,134 @@
+/* Header – design-system: components.header (height 64px, coreSecondary, padding horizontal spacing.6, vertical spacing.0) */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--header-height, 64px);
+  padding: var(--spacing-0) var(--spacing-6);
+  background-color: var(--color-bg-core-secondary);
+  position: relative;
+  z-index: 3;
+}
+
+.header__burger {
+  display: flex;
+  align-items: center;
+  min-width: var(--spacing-8);
+}
+
+.header__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: var(--spacing-0);
+  color: var(--color-content-primary);
+  transition: opacity 0.2s;
+}
+
+.header__menu-btn:hover {
+  opacity: 0.85;
+}
+
+.header__menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Logo: 44×44 at top 10px (Figma spec), clean for screenshot */
+.header__logo {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__logo-svg {
+  width: 44px;
+  height: 44px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Right actions: profile + basket */
+.header__actions {
+  display: flex;
+  gap: var(--spacing-3);
+  align-items: center;
+}
+
+.header__profile,
+.header__basket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-height-small);
+  height: var(--button-height-small);
+  padding: var(--spacing-0);
+  border: var(--border-width-xsmall) solid rgba(255, 255, 255, 0.64);
+  border-radius: var(--border-radius-round);
+  background: linear-gradient(
+    140.753deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+  transition: opacity 0.2s, background 0.2s;
+}
+
+.header__profile:hover,
+.header__basket:hover {
+  opacity: 0.9;
+}
+
+.header__avatar-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.header__avatar-bg {
+  fill: var(--color-content-tertiary);
+}
+
+.header__avatar-head,
+.header__avatar-body {
+  fill: var(--color-content-on-dark);
+}
+
+/* Basket: shopping bag icon + count inside (Figma spec), design-system variables */
+.header__basket {
+  position: relative;
+  color: var(--color-content-primary);
+}
+
+.header__basket-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.header__basket-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--spacing-5);
+  height: var(--spacing-5);
+  padding: 0 var(--spacing-2);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body-xxsmall);
+  font-weight: 700;
+  line-height: var(--line-height-body-xxsmall);
+  color: var(--color-content-on-dark);
+  -webkit-text-stroke: 0.5px var(--color-content-primary);
+  text-stroke: 0.5px var(--color-content-primary);
+  pointer-events: none;
+}

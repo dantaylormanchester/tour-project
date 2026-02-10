@@ -1,0 +1,214 @@
+{
+  "colors": {
+    "content": {
+      "primary": "#001838",
+      "secondary": "rgba(0, 24, 56, 0.8)",
+      "tertiary": "#69738c",
+      "onDark": "#ffffff",
+      "onLight": "#001838",
+      "inverted": "#ffffff",
+      "corePrimary": "#348acb",
+      "status": {
+        "success": "#0d775d"
+      }
+    },
+    "background": {
+      "default": "#ffffff",
+      "baseWhite": "#ffffff",
+      "coreSecondary": "#98c5e9",
+      "subtlePrimary": "#eef5fc",
+      "action": {
+        "transparent": "rgba(255, 255, 255, 0)"
+      },
+      "status": {
+        "successSubtle": "#e8fdf6"
+      }
+    },
+    "border": {
+      "default": "#c8d4e0",
+      "contrast": "#001838",
+      "subtle": "#c9e0f3",
+      "action": {
+        "default": "#aab9cb"
+      },
+      "status": {
+        "success": "#18c390"
+      }
+    },
+    "city": {
+      "electricBlue": {
+        "500": "#3bd6ff"
+      }
+    },
+    "neutral": {
+      "0": "#ffffff"
+    }
+  },
+  "spacing": {
+    "0": "0px",
+    "1": "2px",
+    "2": "4px",
+    "3": "6px",
+    "4": "8px",
+    "5": "12px",
+    "6": "16px",
+    "7": "20px",
+    "8": "24px",
+    "12": "56px",
+    "negative": {
+      "4": "-8px"
+    }
+  },
+  "typography": {
+    "fontFamily": {
+      "kippaxModern": "kippax-modern"
+    },
+    "fontSize": {
+      "hero": {
+        "medium": "48px"
+      },
+      "body": {
+        "large": "16px",
+        "medium": "15px",
+        "small": "14px",
+        "xsmall": "12px",
+        "xxsmall": "10px"
+      },
+      "label": {
+        "medium": "12px",
+        "small": "10px"
+      },
+      "cta": {
+        "small": "12px"
+      }
+    },
+    "fontWeight": {
+      "normal": {
+        "regular": 400,
+        "medium": 500,
+        "bold": 700
+      },
+      "condensed": {
+        "extrabold": 800
+      }
+    },
+    "lineHeight": {
+      "hero": {
+        "medium": "48px"
+      },
+      "body": {
+        "large": "24px",
+        "medium": "24px",
+        "small": "24px",
+        "xsmall": "20px",
+        "xxsmall": "16px"
+      },
+      "label": {
+        "medium": "16px",
+        "small": "16px"
+      },
+      "cta": {
+        "small": "16px"
+      }
+    },
+    "paragraphSpacing": {
+      "xsmall": "8px",
+      "small": "12px",
+      "xxlarge": "32px"
+    }
+  },
+  "borderRadius": {
+    "none": "0px",
+    "small": "4px",
+    "medium": "6px",
+    "large": "8px",
+    "xlarge": "12px",
+    "round": "999px"
+  },
+  "borderWidth": {
+    "xsmall": "1px"
+  },
+  "button": {
+    "height": {
+      "small": "36px"
+    }
+  },
+  "breakpoints": {
+    "screenWidth": "375px"
+  },
+  "components": {
+    "header": {
+      "height": "64px",
+      "backgroundColor": "coreSecondary",
+      "padding": {
+        "horizontal": "spacing.6",
+        "vertical": "spacing.0"
+      }
+    },
+    "badge": {
+      "padding": {
+        "horizontal": "spacing.3",
+        "vertical": "spacing.2"
+      },
+      "borderRadius": "borderRadius.small",
+      "gap": "spacing.2"
+    },
+    "button": {
+      "primary": {
+        "background": "linear-gradient(90deg, var(--colour-city-electric-blue-500) 50%, rgb(26, 180, 246) 100%)",
+        "color": "content.onLight",
+        "height": "button.height.small",
+        "borderRadius": "borderRadius.medium"
+      },
+      "secondary": {
+        "background": "transparent",
+        "border": "1px solid",
+        "borderColor": "border.action.default",
+        "color": "content.primary",
+        "height": "button.height.small",
+        "borderRadius": "borderRadius.medium"
+      }
+    },
+    "input": {
+      "height": "button.height.small",
+      "borderRadius": "borderRadius.medium",
+      "borderColor": "border.default",
+      "backgroundColor": "background.default",
+      "padding": {
+        "left": "spacing.4",
+        "right": "spacing.4",
+        "top": "spacing.3",
+        "bottom": "spacing.3"
+      }
+    },
+    "card": {
+      "borderRadius": "borderRadius.xlarge",
+      "border": "1px solid",
+      "borderColor": "border.default",
+      "padding": "spacing.6",
+      "gap": "spacing.6"
+    },
+    "widget": {
+      "backgroundColor": "background.subtlePrimary",
+      "borderRadius": "borderRadius.large",
+      "border": "1px solid",
+      "borderColor": "border.subtle",
+      "padding": "spacing.6",
+      "gap": "spacing.6"
+    }
+  },
+  "icons": {
+    "usage": {
+      "shoppingBagFilled": "bag, purchase, store bag, checkout bag",
+      "chevronRight": "next, continue, arrow",
+      "ticket": "pass, booking",
+      "disabled": "wheelchair, accessible, accessibility, access, disability, less abled, paralysed",
+      "user": "person, profile, account, avatar, customer",
+      "discount": "percentage, voucher, sale, discount, promotion, offer",
+      "calendar": "calendar, date picker, event, schedule, booking, planner, agenda, day",
+      "chevronDown": "expand, collapse, more, dropdown, arrow down, reveal",
+      "users": "group, members, people",
+      "checkCircleFilled": "confirm, complete, tick, accept, done, success, approval"
+    }
+  }
+}

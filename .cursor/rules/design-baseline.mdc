@@ -1,0 +1,26 @@
+---
+description: Design baseline - continue development from this established design state
+alwaysApply: true
+---
+
+# Design Baseline – Stadium Tours
+
+When working on this project, **build from the design baseline**. Do not revert or contradict these decisions without explicit user request.
+
+## Baseline Reference
+
+Read `DESIGN_BASELINE.md` for the full specification. Summary:
+
+- **Main file**: `stadium-tours.html` (Stadium Tours page, single-file React app)
+- **Design source**: Figma – use `get_design_context` and `get_screenshot` when changing UI
+- **Colours**: Always use CSS variables (`var(--color-*)`), never raw hex
+- **Primary button**: Solid dark blue bg (`--color-content-primary`), white text
+- **Error alerts**: Light pink bg, red border, circular red icon with white exclamation
+- **Tour times**: Custom dropdown, chronological order, low-availability badge where applicable
+- **Matchday**: Magenta indicator (`--color-matchday-indicator`)
+
+## Key Conventions
+
+1. Use design tokens from `:root` in stadium-tours.html
+2. Match Figma for new or changed components
+3. Icons: SVG with `stroke="currentColor"` for themeable strokes

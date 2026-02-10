@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Manchester City</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Rg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Md.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Bd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndRg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndMd.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndxBd.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-content-primary: #001838;
+      --color-content-secondary: rgba(0, 24, 56, 0.8);
+      --color-content-tertiary: #69738c;
+      --color-content-steps: #8898af;
+      --color-content-on-dark: #ffffff;
+      --color-bg-default: #ffffff;
+      --color-bg-base-white: #ffffff;
+      --color-bg-core-secondary: #98c5e9;
+      --color-bg-subtle-primary: #eef5fc;
+      --color-border-default: #c8d4e0;
+      --color-border-subtle: #dee6ed;
+      --spacing-0: 0px;
+      --spacing-2: 4px;
+      --spacing-4: 8px;
+      --spacing-5: 12px;
+      --spacing-6: 16px;
+      --spacing-8: 24px;
+      --font-family: 'Kippax Modern', sans-serif;
+      --font-size-body-large: 18px;
+      --font-size-body-medium: 16px;
+      --font-size-body-small: 14px;
+      --font-size-body-xsmall: 12px;
+      --line-height-body-large: 26px;
+      --line-height-body-medium: 24px;
+      --line-height-body-small: 24px;
+      --line-height-body-xsmall: 20px;
+      --border-radius-medium: 6px;
+      --border-radius-large: 8px;
+      --border-radius-xlarge: 12px;
+      --border-width-xsmall: 1px;
+      --button-height-small: 36px;
+      --color-bg-close-button: #F1F5F8;
+      --shadow-dropdown: 0 2px 4px -2px rgba(0, 24, 56, 0.06), 0 8px 18px -3px rgba(0, 24, 56, 0.2);
+      --color-bg-alpha-dark-blue-80: rgba(0, 24, 56, 0.8);
+      --blur-xsmall: 4px;
+    }
+
+    .prototype-end-overlay {
+      position: fixed;
+      inset: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-6);
+      opacity: 0;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .prototype-end-overlay__backdrop {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(var(--blur-xsmall));
+      background-color: var(--color-bg-alpha-dark-blue-80);
+    }
+
+    .prototype-end-overlay__modal {
+      position: relative;
+      width: 100%;
+      max-width: 343px;
+      padding: var(--spacing-6);
+      background-color: var(--color-bg-default);
+      border-radius: var(--border-radius-large);
+      box-shadow: var(--shadow-dropdown);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-6);
+      box-sizing: border-box;
+    }
+
+    .prototype-end-overlay__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .prototype-end-overlay__title {
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .prototype-end-overlay__close {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 999px;
+      background-color: var(--color-bg-close-button);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .prototype-end-overlay__close:hover {
+      opacity: 0.9;
+    }
+
+    .prototype-end-overlay__close svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .prototype-end-overlay__message {
+      font-size: var(--font-size-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    .prototype-end-overlay__btn {
+      width: 100%;
+      height: 48px;
+      background-color: var(--color-content-primary);
+      color: var(--color-content-on-dark);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .prototype-end-overlay__btn:hover {
+      opacity: 0.9;
+    }
+
+    body {
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      overflow-x: hidden;
+      max-width: 375px;
+      margin: 0 auto;
+    }
+
+    button, input {
+      font-family: inherit;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--color-bg-base-white);
+      width: 375px;
+      max-width: 375px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: var(--spacing-0) var(--spacing-6);
+      background-color: var(--color-bg-core-secondary);
+      position: relative;
+      z-index: 3;
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+    }
+
+    .header__burger { display: flex; align-items: center; width: 86px; }
+    .header__menu-btn { display: flex; align-items: center; background: none; border: none; padding: 0; cursor: pointer; text-decoration: none; color: inherit; }
+    .header__menu-icon { width: 24px; height: 24px; overflow: hidden; flex-shrink: 0; }
+    .header__menu-icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .header__logo { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); display: block; text-decoration: none; }
+    .header__actions { display: flex; gap: 6px; align-items: center; }
+    .header__basket { display: flex; align-items: center; padding: var(--spacing-2); background: none; border: none; border-radius: 0; text-decoration: none; color: inherit; }
+    .header__basket-icon { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; color: var(--color-content-primary); position: relative; }
+    .header__basket-img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .header__basket-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-top: 2px; font-size: 11px; font-weight: 700; color: var(--color-content-on-dark); pointer-events: none; }
+
+    .app__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+      padding: var(--spacing-8) var(--spacing-6);
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+      align-items: stretch;
+      padding-bottom: 120px;
+    }
+
+    .checkout__summary-wrapper {
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+    }
+
+    .checkout__section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      width: 100%;
+    }
+
+    .checkout__section-heading {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: 26px;
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .checkout__section-heading--steps {
+      color: var(--color-content-steps);
+    }
+
+    .checkout__summary {
+      width: 100%;
+      background-color: var(--color-bg-default);
+      border: none;
+      border-bottom: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .checkout__summary-header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    .checkout__summary-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--spacing-6);
+      gap: var(--spacing-6);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .checkout__summary-header:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .checkout__summary-header-text {
+      font-size: var(--font-size-body-medium);
+      font-weight: 600;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+    }
+
+    .checkout__summary-header-total {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-secondary);
+      margin-top: var(--spacing-2);
+    }
+
+    .checkout__summary-chevron-btn {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .checkout__summary-chevron-btn svg {
+      transition: transform 0.2s ease;
+      stroke: currentColor;
+    }
+
+    .checkout__summary-header[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .checkout__summary-panel {
+      border-top: var(--border-width-xsmall) solid var(--color-border-default);
+      padding: var(--spacing-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-5);
+    }
+
+    .checkout__summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--font-size-body-small);
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .checkout__summary-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+    }
+
+    .checkout__summary-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-5);
+      font-size: var(--font-size-body-small);
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .checkout__summary-item-thumb {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .checkout__summary-item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .checkout__summary-item-body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .checkout__summary-item-name {
+      font-weight: 500;
+    }
+
+    .checkout__summary-item-qty {
+      color: var(--color-content-tertiary);
+      font-size: var(--font-size-body-xsmall);
+      line-height: var(--line-height-body-xsmall);
+    }
+
+    .checkout__summary-item-price {
+      flex-shrink: 0;
+      font-weight: 500;
+    }
+
+    .checkout__summary-row--total {
+      font-weight: 700;
+      font-size: var(--font-size-body-medium);
+      padding-top: var(--spacing-4);
+      padding-left: 6px;
+      padding-right: 6px;
+      border-top: var(--border-width-xsmall) solid var(--color-border-default);
+      margin-top: var(--spacing-2);
+    }
+
+    .checkout__form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .checkout__field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .checkout__label {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      color: var(--color-content-primary);
+    }
+
+    .checkout__input {
+      width: 100%;
+      height: 44px;
+      padding: var(--spacing-4) var(--spacing-5);
+      font-size: var(--font-size-body-medium);
+      color: var(--color-content-primary);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-medium);
+      box-sizing: border-box;
+    }
+
+    .checkout__input::placeholder {
+      color: var(--color-content-tertiary);
+    }
+
+    .checkout__divider {
+      width: 100%;
+      height: 0;
+      border: none;
+      border-top: 1px solid var(--color-border-subtle);
+      margin: var(--spacing-4) 0;
+    }
+
+    .checkout__section-placeholder {
+      font-size: var(--font-size-body-small);
+      color: var(--color-content-tertiary);
+      margin: 0;
+    }
+
+    .checkout__cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--spacing-6) var(--spacing-6);
+      padding-bottom: calc(var(--spacing-8) + env(safe-area-inset-bottom, 0));
+      background-color: var(--color-bg-base-white);
+      box-shadow: 0 -2px 8px rgba(0,24,56,0.06);
+      box-sizing: border-box;
+      z-index: 10;
+    }
+
+    .checkout__cta-btn {
+      width: 100%;
+      height: 48px;
+      padding: 0 var(--spacing-6);
+      background-color: var(--color-content-primary);
+      color: var(--color-content-on-dark);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: 24px;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+
+    .checkout__cta-btn:hover {
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const ADD_ON_IMAGES = {
+      'photo-booklet': '/assets/1001159.png',
+      'photo-booklets-4': '/assets/1001160.png',
+      'guidebook': '/assets/1001226.jpg',
+      'vr-headset': '/assets/vr.jpg',
+    };
+
+    function computeBasketCount() {
+      try {
+        const booking = sessionStorage.getItem('stadiumToursLastBooking');
+        const addOnsRaw = sessionStorage.getItem('stadiumToursAddOns');
+        const addOns = addOnsRaw ? JSON.parse(addOnsRaw) : {};
+        const bookingData = booking ? JSON.parse(booking) : null;
+        const participantCount = Number(bookingData?.participantTotal) || 0;
+        const addOnCount = Object.values(addOns).reduce((sum, item) => sum + (Number(item.quantity) || 0), 0);
+        return Math.max(0, participantCount + addOnCount);
+      } catch (_) { return 0; }
+    }
+
+    function App() {
+      const [basketCount, setBasketCount] = useState(() => computeBasketCount());
+      const [booking] = useState(() => {
+        try {
+          const raw = sessionStorage.getItem('stadiumToursLastBooking');
+          return raw ? JSON.parse(raw) : null;
+        } catch (_) { return null; }
+      });
+      const [addOns] = useState(() => {
+        try {
+          const raw = sessionStorage.getItem('stadiumToursAddOns');
+          return raw ? JSON.parse(raw) : {};
+        } catch (_) { return {}; }
+      });
+      const [summaryOpen, setSummaryOpen] = useState(false);
+      const [prototypeEndOpen, setPrototypeEndOpen] = useState(false);
+      const [email, setEmail] = useState('');
+      const [firstName, setFirstName] = useState('');
+      const [lastName, setLastName] = useState('');
+
+      useEffect(() => {
+        const update = () => setBasketCount(computeBasketCount());
+        update();
+        window.addEventListener('storage', update);
+        return () => window.removeEventListener('storage', update);
+      }, []);
+
+      const addOnEntries = Object.entries(addOns || {});
+      const baseTotal = booking?.priceBreakdown?.total ?? 0;
+      const addOnsTotal = addOnEntries.reduce((sum, [, item]) => {
+        const price = Number(item.price) || 0;
+        const qty = Number(item.quantity) || 0;
+        return sum + price * qty;
+      }, 0);
+      const grandTotal = baseTotal + addOnsTotal;
+      const participantCountFromBreakdown = (booking?.priceBreakdown?.items || []).reduce((sum, item) => {
+        const m = (item.text || '').match(/^(\d+)/);
+        return sum + (m ? parseInt(m[1], 10) : 0);
+      }, 0);
+      const tourParticipantCount = Number(booking?.participantTotal) || participantCountFromBreakdown || (booking?.priceBreakdown?.items?.length > 0 ? 1 : 0);
+      const addOnCount = addOnEntries.reduce((sum, [, item]) => sum + (Number(item.quantity) || 0), 0);
+      const tourItemCount = tourParticipantCount;
+      const totalItemCount = Math.max(0, tourItemCount + addOnCount);
+
+      return (
+        <div className="app">
+          <header className="header" role="banner">
+            <div className="header__burger">
+              <a href="basket.html" className="header__menu-btn" aria-label="Back to basket">
+                <div className="header__menu-icon">
+                  <img src="/assets/checkout-menu-icon.svg" alt="" />
+                </div>
+              </a>
+            </div>
+            <a href="stadium-tours.html" className="header__logo" aria-label="Manchester City">
+              <img src="/assets/logo.svg" alt="Manchester City FC" width="48" height="48" />
+            </a>
+            <div className="header__actions">
+              <div className="header__basket">
+                <div className="header__basket-icon">
+                  <img src="/assets/checkout-basket-icon.svg" alt="" className="header__basket-img" />
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div className="checkout__summary-wrapper">
+            <div className="checkout__summary">
+                <button
+                  type="button"
+                  className="checkout__summary-header"
+                  onClick={() => setSummaryOpen(!summaryOpen)}
+                  aria-expanded={summaryOpen}
+                  aria-controls="checkout-summary-panel"
+                  aria-label={summaryOpen ? 'Collapse order summary' : 'Expand order summary'}
+                  id="checkout-summary-trigger"
+                >
+                  <div className="checkout__summary-header-content">
+                    <span className="checkout__summary-header-text">Order Summary</span>
+                    <span className="checkout__summary-header-total">£{grandTotal.toFixed(2)}</span>
+                  </div>
+                  <span className="checkout__summary-chevron-btn" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M7 10l5 5 5-5" />
+                    </svg>
+                  </span>
+                </button>
+                <div id="checkout-summary-panel" className="checkout__summary-panel" role="region" aria-labelledby="checkout-summary-trigger" aria-hidden={!summaryOpen} style={{ display: summaryOpen ? 'flex' : 'none' }}>
+                  <div className="checkout__summary-items">
+                    {booking && (
+                      <div className="checkout__summary-item">
+                        <div className="checkout__summary-item-thumb">
+                          <img src="/assets/1.png" alt="" />
+                        </div>
+                        <div className="checkout__summary-item-body">
+                          <span className="checkout__summary-item-name">{booking.tourTitle || 'Manchester City Stadium tour'}</span>
+                          <span className="checkout__summary-item-qty">{tourParticipantCount} {tourParticipantCount === 1 ? 'item' : 'items'}</span>
+                        </div>
+                        <span className="checkout__summary-item-price">£{baseTotal.toFixed(2)}</span>
+                      </div>
+                    )}
+                    {addOnEntries.filter(([, item]) => (Number(item.quantity) || 0) > 0).map(([key, item]) => {
+                      const qty = Number(item.quantity) || 0;
+                      const lineTotal = (Number(item.price) || 0) * qty;
+                      return (
+                        <div key={key} className="checkout__summary-item">
+                          <div className="checkout__summary-item-thumb">
+                            <img src={item.image || ADD_ON_IMAGES[key] || '/assets/placeholder-stadium.jpg'} alt={item.title} />
+                          </div>
+                          <div className="checkout__summary-item-body">
+                            <span className="checkout__summary-item-name">{item.title}</span>
+                            <span className="checkout__summary-item-qty">{qty} {qty === 1 ? 'item' : 'items'}</span>
+                          </div>
+                          <span className="checkout__summary-item-price">£{lineTotal.toFixed(2)}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className="checkout__summary-row">
+                    <span>Delivery</span>
+                    <span>Calculated at checkout</span>
+                  </div>
+                  <div className="checkout__summary-row checkout__summary-row--total">
+                    <span>Total</span>
+                    <span>£{grandTotal.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <main className="app__content">
+
+            <section className="checkout__section">
+              <h2 className="checkout__section-heading">Your details</h2>
+              <div className="checkout__form">
+                <div className="checkout__field">
+                  <label className="checkout__label" htmlFor="checkout-email">Email</label>
+                  <input id="checkout-email" type="email" className="checkout__input" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="checkout__field">
+                  <label className="checkout__label" htmlFor="checkout-first">First name</label>
+                  <input id="checkout-first" type="text" className="checkout__input" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                </div>
+                <div className="checkout__field">
+                  <label className="checkout__label" htmlFor="checkout-last">Last name</label>
+                  <input id="checkout-last" type="text" className="checkout__input" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                </div>
+                <button type="button" className="checkout__cta-btn" onClick={() => setPrototypeEndOpen(true)}>Continue to delivery</button>
+              </div>
+            </section>
+
+            <div className="checkout__divider" role="presentation" />
+
+            <section className="checkout__section">
+              <h2 className="checkout__section-heading checkout__section-heading--steps">Delivery</h2>
+            </section>
+
+            <div className="checkout__divider" role="presentation" />
+
+            <section className="checkout__section">
+              <h2 className="checkout__section-heading checkout__section-heading--steps">Payment</h2>
+            </section>
+          </main>
+
+          {prototypeEndOpen && (
+            <div className="prototype-end-overlay" role="dialog" aria-modal="true" aria-labelledby="prototype-end-title">
+              <div className="prototype-end-overlay__backdrop" onClick={() => setPrototypeEndOpen(false)} aria-hidden="true" />
+              <div className="prototype-end-overlay__modal">
+                <div className="prototype-end-overlay__header">
+                  <h2 id="prototype-end-title" className="prototype-end-overlay__title">End of prototype</h2>
+                  <button type="button" className="prototype-end-overlay__close" aria-label="Close" onClick={() => setPrototypeEndOpen(false)}>
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 1l10 10M11 1L1 11" />
+                    </svg>
+                  </button>
+                </div>
+                <a href="discovery.html" className="prototype-end-overlay__btn">
+                  Back to experiences
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

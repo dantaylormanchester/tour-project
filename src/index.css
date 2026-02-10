@@ -1,0 +1,137 @@
+@font-face {
+  font-family: 'Kippax Modern';
+  src: url('https://fonts.cdnfonts.com/s/93522/KippaxModern-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kippax Modern';
+  src: url('https://fonts.cdnfonts.com/s/93522/KippaxModern-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kippax Modern';
+  src: url('https://fonts.cdnfonts.com/s/93522/KippaxModern-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Kippax Modern';
+  src: url('https://fonts.cdnfonts.com/s/93522/KippaxModernCondensed-Extrabold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-stretch: condensed;
+}
+
+:root {
+  /* Colors */
+  --color-content-primary: #001838;
+  --color-content-secondary: rgba(0, 24, 56, 0.8);
+  --color-content-tertiary: #69738c;
+  --color-content-on-dark: #ffffff;
+  --color-content-on-light: #001838;
+  --color-content-inverted: #ffffff;
+  --color-content-core-primary: #348acb;
+  --color-content-status-success: #0d775d;
+  
+  --color-bg-default: #ffffff;
+  --color-bg-base-white: #ffffff;
+  --color-bg-core-secondary: #98c5e9;
+  --color-bg-subtle-primary: #eef5fc;
+  --color-bg-action-transparent: rgba(255, 255, 255, 0);
+  --color-bg-status-success-subtle: #e8fdf6;
+  
+  --color-border-default: #c8d4e0;
+  --color-border-contrast: #001838;
+  --color-border-subtle: #c9e0f3;
+  --color-border-action-default: #aab9cb;
+  --color-border-status-success: #18c390;
+  
+  --color-city-electric-blue: #3bd6ff;
+  
+  /* Spacing */
+  --spacing-0: 0px;
+  --spacing-1: 2px;
+  --spacing-2: 4px;
+  --spacing-3: 6px;
+  --spacing-4: 8px;
+  --spacing-5: 12px;
+  --spacing-6: 16px;
+  --spacing-7: 20px;
+  --spacing-8: 24px;
+  --spacing-12: 56px;
+  --spacing-negative-4: -8px;
+  
+  /* Typography */
+  --font-family: 'Kippax Modern', sans-serif;
+  --font-size-hero-medium: 48px;
+  --font-size-body-large: 16px;
+  --font-size-body-medium: 15px;
+  --font-size-body-small: 14px;
+  --font-size-body-xsmall: 12px;
+  --font-size-body-xxsmall: 10px;
+  --font-size-label-medium: 12px;
+  --font-size-label-small: 10px;
+  --font-size-cta-small: 12px;
+  
+  --line-height-hero-medium: 48px;
+  --line-height-body-large: 24px;
+  --line-height-body-medium: 24px;
+  --line-height-body-small: 24px;
+  --line-height-body-xsmall: 20px;
+  --line-height-body-xxsmall: 16px;
+  --line-height-label-medium: 16px;
+  --line-height-label-small: 16px;
+  --line-height-cta-small: 16px;
+  
+  /* Border Radius */
+  --border-radius-none: 0px;
+  --border-radius-small: 4px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 8px;
+  --border-radius-xlarge: 12px;
+  --border-radius-round: 999px;
+  
+  /* Border Width */
+  --border-width-xsmall: 1px;
+  
+  /* Button */
+  --button-height-small: 36px;
+
+  /* Header (components.header) */
+  --header-height: 64px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-default);
+  color: var(--color-content-primary);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input {
+  font-family: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

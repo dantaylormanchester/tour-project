@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basket - Manchester City</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto+Condensed:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    /* Kippax Modern Font Faces - Same as Stadium Tours / Discovery */
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Rg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Md.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-Bd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndRg.otf') format('opentype');
+      font-weight: 400;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndMd.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBd.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndxBd.otf') format('opentype');
+      font-weight: 800;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kippax Modern';
+      src: url('./fonts/KippaxModern-CndBlk.otf') format('opentype');
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: condensed;
+      font-display: swap;
+    }
+  </style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-content-primary: #001838;
+      --color-content-secondary: rgba(0, 24, 56, 0.8);
+      --color-content-tertiary: #69738c;
+      --color-content-on-dark: #ffffff;
+      --color-bg-default: #ffffff;
+      --color-bg-base-white: #ffffff;
+      --color-bg-core-secondary: #98c5e9;
+      --color-bg-action-transparent: rgba(255, 255, 255, 0);
+      --color-bg-action-brand-secondary-hover: #c9e0f3;
+      --color-bg-subtle-primary: #eef5fc;
+      --color-border-action-hover: #69738c;
+      --spacing-0: 0px;
+      --spacing-2: 4px;
+      --spacing-4: 8px;
+      --spacing-5: 12px;
+      --spacing-6: 16px;
+      --spacing-7: 20px;
+      --spacing-8: 24px;
+      --spacing-12: 56px;
+      --button-height-small: 36px;
+      --font-family: 'Kippax Modern', sans-serif;
+      --font-size-body-large: 18px;
+      --font-size-body-medium: 16px;
+      --font-size-body-small: 14px;
+      --font-size-hero-medium: 48px;
+      --line-height-body-large: 26px;
+      --line-height-body-medium: 24px;
+      --line-height-body-small: 24px;
+      --line-height-hero-medium: 48px;
+      --border-radius-round: 999px;
+      --border-radius-small: 4px;
+      --border-radius-medium: 6px;
+      --border-radius-large: 8px;
+      --border-radius-xlarge: 12px;
+      --border-width-xsmall: 1px;
+      --shadow-dropdown: 0 2px 4px -2px rgba(0, 24, 56, 0.06), 0 8px 18px -3px rgba(0, 24, 56, 0.2);
+      --color-border-default: #c8d4e0;
+      --color-border-action-default: #aab9cb;
+      --color-bg-status-error-subtle: #FFEEF0;
+      --color-border-status-error: #DC2626;
+      --color-city-electric-blue: #3bd6ff;
+      --color-border-status-info: #3bd6ff;
+      --color-bg-status-info-subtle: #e8faff;
+      --blur-xsmall: 4px;
+      --color-bg-alpha-dark-blue-80: rgba(0, 24, 56, 0.8);
+      /* Figma design system – body/medium: 15px, body/small: 14px */
+      --font-size-figma-body-medium: 15px;
+      --line-height-figma-body-medium: 24px;
+      --font-size-figma-body-small: 14px;
+      --line-height-figma-body-small: 24px;
+      /* Figma Panel 6321:1162141 – Remove item modal */
+      --color-bg-close-button: #F1F5F8;
+      --color-button-destructive: #F50021;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    body {
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      overflow-x: hidden;
+      max-width: 375px;
+      margin: 0 auto;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: var(--color-bg-base-white);
+      width: 375px;
+      max-width: 375px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    /* Header - same as Stadium Tours (standalone) */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: var(--spacing-0) var(--spacing-6);
+      background-color: var(--color-bg-core-secondary);
+      position: relative;
+      z-index: 3;
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+    }
+
+    .header__burger {
+      display: flex;
+      align-items: center;
+      width: 86px;
+    }
+
+    .header__menu-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .header__menu-icon {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .header__menu-icon img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+    }
+
+    .header__logo {
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      transform: translateX(-50%);
+      display: block;
+      text-decoration: none;
+    }
+
+    .header__actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .header__basket {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-2);
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: var(--border-radius-round);
+      background: linear-gradient(140.753deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.16) 100%);
+      position: relative;
+      gap: var(--spacing-5);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .header__basket-icon {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-content-primary);
+    }
+
+    .header__basket-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .header__basket-number {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 2px;
+      font-family: var(--font-family);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-content-on-dark);
+      pointer-events: none;
+    }
+
+    .app__content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+      padding: var(--spacing-8) var(--spacing-6);
+      width: 375px;
+      max-width: 375px;
+      box-sizing: border-box;
+      align-items: flex-start;
+    }
+
+    .app__header-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-0);
+      width: 100%;
+      align-items: flex-start;
+    }
+
+    .app__title {
+      font-family: var(--font-family);
+      font-size: var(--font-size-hero-medium);
+      font-weight: 800;
+      font-stretch: condensed;
+      line-height: var(--line-height-hero-medium);
+      letter-spacing: -0.48px;
+      text-transform: uppercase;
+      color: var(--color-content-primary);
+      margin: 0;
+      width: 100%;
+    }
+
+    /* Basket section */
+    .basket {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .basket__divider {
+      width: 100%;
+      height: 0;
+      border: none;
+      border-top: 1px dotted var(--color-border-default);
+      margin: 0;
+    }
+
+    .basket__divider-with-text {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-6);
+      width: 100%;
+      margin: 0 0 -4px 0;
+    }
+
+    .basket__divider-with-text::before,
+    .basket__divider-with-text::after {
+      content: '';
+      flex: 1;
+      height: 0;
+      border: none;
+      border-top: 1px dotted var(--color-border-default);
+    }
+
+    .basket__divider-with-text__label {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-tertiary);
+      white-space: nowrap;
+    }
+
+    .basket__empty {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-tertiary);
+      margin: 0;
+    }
+
+    .basket__continue-shopping {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 48px;
+      padding: 0 var(--spacing-6);
+      background-color: var(--color-content-primary);
+      color: var(--color-content-on-dark);
+      border-radius: var(--border-radius-medium);
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: 20px;
+      text-decoration: none;
+      box-sizing: border-box;
+      margin-top: var(--spacing-6);
+    }
+
+    .basket__continue-shopping:hover {
+      opacity: 0.95;
+    }
+
+    .basket-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      width: 100%;
+    }
+
+    .basket-item__row {
+      display: flex;
+      gap: var(--spacing-5);
+      align-items: flex-start;
+    }
+
+    .basket-item__thumb {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: var(--border-radius-medium);
+      overflow: hidden;
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .basket-item__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .basket-item__body {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-2);
+    }
+
+    .basket-item__title {
+      font-family: var(--font-family);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+    }
+
+    .basket-item__meta {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-tertiary);
+    }
+
+    .basket-item__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .basket-item__delete {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-small);
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .basket-item__delete:hover {
+      border-color: var(--color-border-action-hover);
+      color: var(--color-content-primary);
+    }
+
+    .basket-item__delete svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .basket-item__price {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+    }
+
+    /* Add-on items in basket */
+    .basket-item--addon .basket-item__thumb {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .basket-item--addon .basket-item__title {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+    }
+
+    .basket-item__footer--addon {
+      gap: var(--spacing-5);
+    }
+
+    .basket-item__addon-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+    }
+
+    .basket-item__addon-quantity {
+      display: flex;
+      align-items: center;
+      width: 96px;
+      height: 36px;
+      padding: var(--spacing-4) var(--spacing-5);
+      padding-right: 40px;
+      font-size: var(--font-size-body-small);
+      font-family: var(--font-family);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-medium);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%23001838' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--spacing-4) center;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .basket-item__addon-quantity-wrap {
+      position: relative;
+      width: 96px;
+    }
+
+    .basket-item__addon-quantity-dropdown {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      margin-top: var(--spacing-2);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-medium);
+      box-shadow: var(--shadow-dropdown);
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .basket-item__addon-quantity-option {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: var(--spacing-4) var(--spacing-5);
+      font-size: var(--font-size-body-small);
+      font-family: var(--font-family);
+      font-weight: 500;
+      color: var(--color-content-primary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .basket-item__addon-quantity-option:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    /* Order summary – card matching Figma */
+    .basket-summary {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: var(--spacing-6);
+      background-color: var(--color-bg-default);
+      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border-radius: var(--border-radius-xlarge);
+      box-sizing: border-box;
+    }
+
+    .basket-summary__title {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-large);
+      font-weight: 700;
+      line-height: var(--line-height-body-large);
+      color: var(--color-content-primary);
+      margin: 0 0 var(--spacing-6) 0;
+      width: 100%;
+    }
+
+    .basket-summary__rows {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      width: 100%;
+    }
+
+    .basket-summary__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .basket-summary__label {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .basket-summary__value {
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+    }
+
+    .basket-summary__row--total {
+      margin-top: var(--spacing-4);
+      padding-top: var(--spacing-4);
+    }
+
+    .basket-summary__row--total .basket-summary__label,
+    .basket-summary__row--total .basket-summary__value {
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-primary);
+    }
+
+    .basket-footer {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      width: 100%;
+    }
+
+    .basket-cta {
+      width: 100%;
+      height: var(--button-height-small);
+      padding: var(--spacing-4) var(--spacing-5);
+      margin-top: var(--spacing-6);
+      background-color: var(--color-city-electric-blue);
+      color: var(--color-content-primary);
+      border: none;
+      border-radius: var(--border-radius-medium);
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-small);
+      font-weight: 700;
+      line-height: var(--line-height-body-small);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .basket-cta:hover {
+      opacity: 0.95;
+    }
+
+    /* Countdown timer – same design as alert, electric blue (Figma) */
+    .countdown-timer {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: var(--spacing-4) var(--spacing-5);
+      background-color: var(--color-bg-status-info-subtle);
+      border: var(--border-width-xsmall) solid var(--color-city-electric-blue);
+      border-radius: var(--border-radius-large);
+      width: 100%;
+      box-sizing: border-box;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    .countdown-timer__icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-timer__icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .countdown-timer__text {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-primary);
+      flex: 1;
+    }
+
+    .countdown-timer__value {
+      font-weight: 700;
+    }
+
+    /* Delete confirmation overlay – Figma node 6321:1162141 (ECOM-2 Ideation)
+       Same as loading overlay (backdrop + blur) + design-system card & buttons */
+    .delete-confirm-overlay {
+      position: fixed;
+      inset: 0;
+      max-width: 375px;
+      margin: 0 auto;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-6);
+      opacity: 0;
+      animation: fadeIn 0.3s ease-in-out forwards;
+    }
+
+    .delete-confirm-overlay__backdrop {
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(var(--blur-xsmall));
+      background-color: var(--color-bg-alpha-dark-blue-80);
+    }
+
+    /* Figma Panel 343px, radius 8, padding 16 16 16 24, gap 16 */
+    .delete-confirm-overlay__modal {
+      position: relative;
+      width: 100%;
+      max-width: 343px;
+      padding: var(--spacing-6) var(--spacing-6) var(--spacing-8) var(--spacing-6);
+      background-color: var(--color-bg-default);
+      border-radius: var(--border-radius-large);
+      box-shadow: var(--shadow-dropdown);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-6);
+      box-sizing: border-box;
+    }
+
+    .delete-confirm-overlay__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: var(--spacing-6);
+    }
+
+    .delete-confirm-overlay__title {
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .delete-confirm-overlay__close {
+      width: 32px;
+      height: 32px;
+      border: none;
+      border-radius: 999px;
+      background-color: var(--color-bg-close-button);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .delete-confirm-overlay__close:hover {
+      opacity: 0.9;
+    }
+
+    .delete-confirm-overlay__close svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .delete-confirm-overlay__message {
+      font-size: var(--font-size-figma-body-medium);
+      font-weight: 400;
+      line-height: var(--line-height-figma-body-medium);
+      color: var(--color-content-primary);
+      margin: 0;
+      text-align: left;
+      width: 100%;
+    }
+
+    .delete-confirm-overlay__items {
+      width: 100%;
+      padding: var(--spacing-4) 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-6);
+      background-color: var(--color-bg-default);
+      border-radius: var(--border-radius-small);
+    }
+
+    .delete-confirm-overlay__item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-6);
+      width: 100%;
+    }
+
+    .delete-confirm-overlay__item-thumb {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      border-radius: var(--border-radius-small);
+      overflow: hidden;
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .delete-confirm-overlay__item-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .delete-confirm-overlay__item-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .delete-confirm-overlay__item-title {
+      font-size: var(--font-size-figma-body-small);
+      font-weight: 700;
+      line-height: 24px;
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .delete-confirm-overlay__item-meta {
+      font-size: var(--font-size-figma-body-small);
+      font-weight: 400;
+      line-height: 24px;
+      color: var(--color-content-primary);
+      margin: 0;
+    }
+
+    .delete-confirm-overlay__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .delete-confirm-overlay__btn {
+      width: 100%;
+      height: 48px;
+      padding: 0 var(--spacing-7);
+      border-radius: var(--border-radius-large);
+      font-family: var(--font-family);
+      font-size: var(--font-size-body-medium);
+      font-weight: 700;
+      line-height: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      border: none;
+    }
+
+    /* legacy secondary transparent, border action.default */
+    .delete-confirm-overlay__btn--secondary {
+      background-color: var(--color-bg-action-transparent);
+      color: var(--color-content-primary);
+      border: var(--border-width-xsmall) solid var(--color-border-action-default);
+    }
+
+    .delete-confirm-overlay__btn--secondary:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    /* design-system button primary: content primary bg, white text */
+    .delete-confirm-overlay__btn--primary {
+      background-color: var(--color-content-primary);
+      color: var(--color-content-on-dark);
+      border: none;
+    }
+
+    .delete-confirm-overlay__btn--primary:hover {
+      opacity: 0.9;
+    }
+
+    .delete-confirm-overlay__btn--remove {
+      background-color: var(--color-button-destructive);
+      color: var(--color-content-on-dark);
+    }
+
+    .delete-confirm-overlay__btn--remove:hover {
+      opacity: 0.9;
+    }
+
+    .delete-confirm-overlay__btn--cancel {
+      background-color: var(--color-bg-default);
+      color: var(--color-content-primary);
+      border: var(--border-width-xsmall) solid var(--color-border-action-default);
+    }
+
+    .delete-confirm-overlay__btn--cancel:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return m + ':' + (s < 10 ? '0' + s : s);
+    }
+
+    // Fallback images for add-ons when sessionStorage entry has no image (e.g. old data)
+    const ADD_ON_IMAGES = {
+      'photo-booklet': '/assets/1001159.png',
+      'photo-booklets-4': '/assets/1001160.png',
+      'guidebook': '/assets/1001226.jpg',
+      'vr-headset': '/assets/vr.jpg',
+    };
+
+    // Tour add-ons (photo booklet, guidebook, etc.) are tied to the stadium tour – removed when tour is removed.
+    // Extras (keys like extras-1, extras-2) are standalone merchandise – removed only individually.
+    const TOUR_ADD_ON_KEYS = ['photo-booklet', 'photo-booklets-4', 'guidebook', 'vr-headset'];
+    const isTourAddOn = (key) => TOUR_ADD_ON_KEYS.includes(key);
+
+    function App() {
+      const [booking] = useState(() => {
+        try {
+          const raw = sessionStorage.getItem('stadiumToursLastBooking');
+          return raw ? JSON.parse(raw) : null;
+        } catch (_) {
+          return null;
+        }
+      });
+
+      const [addOns, setAddOns] = useState(() => {
+        try {
+          const raw = sessionStorage.getItem('stadiumToursAddOns');
+          return raw ? JSON.parse(raw) : {};
+        } catch (_) {
+          return {};
+        }
+      });
+
+      const [openAddOnKey, setOpenAddOnKey] = useState(null);
+      const [secondsLeft, setSecondsLeft] = useState(60 * 60); // 1 hour
+      const [deleteConfirmPending, setDeleteConfirmPending] = useState(() =>
+        typeof window !== 'undefined' && window.location.hash === '#delete-demo' ? { type: 'addon', key: '_demo' } : null
+      ); // { type: 'addon', key } | { type: 'tour' } | null
+
+      useEffect(() => {
+        if (secondsLeft <= 0) return;
+        const id = setInterval(() => setSecondsLeft((prev) => Math.max(0, prev - 1)), 1000);
+        return () => clearInterval(id);
+      }, [secondsLeft]);
+
+      const addOnEntries = Object.entries(addOns || {});
+      const addOnsTotal = addOnEntries.reduce((sum, [, item]) => {
+        const price = Number(item.price) || 0;
+        const qty = Number(item.quantity) || 0;
+        return sum + price * qty;
+      }, 0);
+
+      const baseTotal = booking?.priceBreakdown?.total ?? 0;
+      const grandTotal = baseTotal + addOnsTotal;
+
+      // Each participant = 1 item. Use saved participantTotal, or derive from price breakdown (e.g. "2 Adults" → 2)
+      const participantCountFromBreakdown = (booking?.priceBreakdown?.items || []).reduce((sum, item) => {
+        const m = (item.text || '').match(/^(\d+)/);
+        return sum + (m ? parseInt(m[1], 10) : 0);
+      }, 0);
+      const tourItemCount = Number(booking?.participantTotal) || participantCountFromBreakdown || (booking?.priceBreakdown?.items?.length > 0 ? 1 : 0);
+      const addOnCount = addOnEntries.reduce((sum, [, item]) => sum + (Number(item.quantity) || 0), 0);
+      const totalItemCount = Math.max(0, tourItemCount + addOnCount);
+      const basketCount = totalItemCount;
+
+      const updateAddOnQuantity = (key, quantity) => {
+        const safeQty = Math.max(0, Number(quantity) || 0);
+        setAddOns(prev => {
+          const next = { ...prev };
+          const item = next[key];
+          if (!item) return prev;
+          if (safeQty === 0) {
+            delete next[key];
+          } else {
+            next[key] = { ...item, quantity: safeQty };
+          }
+          try {
+            sessionStorage.setItem('stadiumToursAddOns', JSON.stringify(next));
+          } catch (_) {}
+          return next;
+        });
+      };
+
+      const handleDeleteConfirm = () => {
+        if (!deleteConfirmPending) return;
+        if (deleteConfirmPending.key === '_demo') {
+          setDeleteConfirmPending(null);
+          if (typeof window !== 'undefined') window.history.replaceState(null, '', window.location.pathname);
+          return;
+        }
+        if (deleteConfirmPending.type === 'addon') {
+          updateAddOnQuantity(deleteConfirmPending.key, 0);
+          setOpenAddOnKey(null);
+        } else if (deleteConfirmPending.type === 'tour') {
+          try {
+            sessionStorage.removeItem('stadiumToursLastBooking');
+            const raw = sessionStorage.getItem('stadiumToursAddOns');
+            const addOns = raw ? JSON.parse(raw) : {};
+            const extrasOnly = Object.fromEntries(
+              Object.entries(addOns).filter(([key]) => !isTourAddOn(key))
+            );
+            if (Object.keys(extrasOnly).length > 0) {
+              sessionStorage.setItem('stadiumToursAddOns', JSON.stringify(extrasOnly));
+            } else {
+              sessionStorage.removeItem('stadiumToursAddOns');
+            }
+          } catch (_) {}
+          window.location.reload();
+        }
+        setDeleteConfirmPending(null);
+      };
+
+      const handleDeleteCancel = () => {
+        setDeleteConfirmPending(null);
+      };
+
+      return (
+        <div className="app">
+          <header className="header">
+            <div className="header__burger">
+              <button className="header__menu-btn" aria-label="Open menu">
+                <div className="header__menu-icon">
+                  <img src="/assets/c16f303c4d01145625249e67fdfa0f7bbf9aa0a9.svg" alt="" />
+                </div>
+              </button>
+            </div>
+
+            <a href="stadium-tours.html" className="header__logo" aria-label="Back to Stadium Tours">
+              <img src="/assets/logo.svg" alt="Manchester City FC" width="48" height="48" />
+            </a>
+
+            <div className="header__actions">
+              <a href="basket.html" className="header__basket" aria-label={basketCount > 0 ? `Shopping basket, ${basketCount} item${basketCount !== 1 ? 's' : ''}` : 'Shopping basket'}>
+                <div className="header__basket-icon">
+                  <img src="/assets/basket.svg" alt="" className="header__basket-img" />
+                  {basketCount > 0 && (
+                    <span className="header__basket-number" aria-hidden="true">{basketCount > 99 ? '99+' : basketCount}</span>
+                  )}
+                </div>
+              </a>
+            </div>
+          </header>
+
+          <main className="app__content">
+            <div className="app__header-section">
+              <h1 className="app__title">BASKET</h1>
+            </div>
+
+            {totalItemCount > 0 && (
+            <div className="countdown-timer">
+              <div className="countdown-timer__icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="10" cy="10" r="10" fill="var(--color-content-primary)"/>
+                  <path d="M10 5v5" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                  <circle cx="10" cy="14" r="1" fill="white"/>
+                </svg>
+              </div>
+              <span className="countdown-timer__text">
+                {secondsLeft > 0
+                  ? <React.Fragment>Your items will be held for <span className="countdown-timer__value">{formatTime(secondsLeft)}</span></React.Fragment>
+                  : 'Your items are no longer held.'}
+              </span>
+            </div>
+            )}
+
+            <section className="basket">
+              {totalItemCount === 0 ? (
+                <>
+                  <p className="basket__empty">Your basket is empty.</p>
+                  <a href="stadium-tours.html" className="basket__continue-shopping">Continue shopping</a>
+                </>
+              ) : booking && (
+                <article className="basket-item">
+                  <div className="basket-item__row">
+                    <div className="basket-item__thumb">
+                      <img src="/assets/1.png" alt="" />
+                    </div>
+                    <div className="basket-item__body">
+                      <h2 className="basket-item__title">{booking.tourTitle || 'Manchester City Stadium tour'}</h2>
+                      <p className="basket-item__meta">
+                        {booking.dateLabel && booking.time
+                          ? `${booking.dateLabel} · ${booking.time}`
+                          : 'Sat 27 May 2025 · 15:00'}
+                      </p>
+                      {(booking.priceBreakdown?.items || []).length > 0 && (
+                      <p className="basket-item__meta">
+                        {(booking.priceBreakdown.items || [])
+                          .map(item => (item.text || '').replace(/\s*x\s*£[\d.]+$/, '').trim() || item.text)
+                          .join(', ')}
+                      </p>
+                    )}
+                    </div>
+                  </div>
+                  <div className="basket-item__footer">
+                    <button type="button" className="basket-item__delete" aria-label="Remove from basket" onClick={() => setDeleteConfirmPending({ type: 'tour' })}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                      </svg>
+                    </button>
+                    <span className="basket-item__price">£{baseTotal.toFixed(2)}</span>
+                  </div>
+                </article>
+              )}
+              {booking && addOnEntries.filter(([, item]) => (Number(item.quantity) || 0) > 0).length > 0 && (
+                <div className="basket__divider-with-text" role="presentation">
+                  <span className="basket__divider-with-text__label">add-ons</span>
+                </div>
+              )}
+              {addOnEntries
+                .filter(([, item]) => (Number(item.quantity) || 0) > 0)
+                .map(([key, item], index) => (
+                  <React.Fragment key={key}>
+                    {index > 0 && <hr className="basket__divider" aria-hidden="true" />}
+                    <article className="basket-item basket-item--addon">
+                    <div className="basket-item__row">
+                      <div className="basket-item__thumb">
+                        <img src={item.image || ADD_ON_IMAGES[key] || '/assets/placeholder-stadium.jpg'} alt={item.title} />
+                      </div>
+                      <div className="basket-item__body">
+                        <h2 className="basket-item__title">{item.title}</h2>
+                        {isTourAddOn(key) && (
+                          <p className="basket-item__meta">Add-on</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="basket-item__footer basket-item__footer--addon">
+                      <div className="basket-item__addon-controls">
+                        <button
+                          type="button"
+                          className="basket-item__delete"
+                          aria-label={`Remove ${item.title} from basket`}
+                          onClick={() => setDeleteConfirmPending({ type: 'addon', key })}
+                        >
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+                            <line x1="10" y1="11" x2="10" y2="17" />
+                            <line x1="14" y1="11" x2="14" y2="17" />
+                          </svg>
+                        </button>
+                        <div className="basket-item__addon-quantity-wrap">
+                            <button
+                              type="button"
+                              className="basket-item__addon-quantity"
+                              aria-label={`Quantity for ${item.title}`}
+                              onClick={() => setOpenAddOnKey(openAddOnKey === key ? null : key)}
+                            >
+                              {item.quantity}
+                            </button>
+                            {openAddOnKey === key && (
+                              <div className="basket-item__addon-quantity-dropdown">
+                                {[0, 1, 2, 3].map(n => (
+                                  <button
+                                    key={n}
+                                    type="button"
+                                    className="basket-item__addon-quantity-option"
+                                    onClick={() => {
+                                      if (n === 0) {
+                                        setDeleteConfirmPending({ type: 'addon', key });
+                                        setOpenAddOnKey(null);
+                                      } else {
+                                        updateAddOnQuantity(key, n);
+                                        setOpenAddOnKey(null);
+                                      }
+                                    }}
+                                  >
+                                    {n}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                      </div>
+                      <span className="basket-item__price">
+                        £{(Number(item.price || 0) * Number(item.quantity || 0)).toFixed(2)}
+                      </span>
+                    </div>
+                  </article>
+                  </React.Fragment>
+                ))}
+            </section>
+
+            {totalItemCount > 0 && (
+            <div className="basket-footer">
+              <div className="basket-summary">
+                <h2 className="basket-summary__title">Order summary</h2>
+                <div className="basket-summary__rows">
+                  <div className="basket-summary__row">
+                    <span className="basket-summary__label">{totalItemCount} {totalItemCount === 1 ? 'item' : 'items'}</span>
+                    <span className="basket-summary__value">£{(baseTotal + addOnsTotal).toFixed(2)}</span>
+                  </div>
+                  <div className="basket-summary__row">
+                    <span className="basket-summary__label">Delivery</span>
+                    <span className="basket-summary__value">Calculated at checkout</span>
+                  </div>
+                  <div className="basket-summary__row basket-summary__row--total">
+                    <span className="basket-summary__label">Total</span>
+                    <span className="basket-summary__value">£{grandTotal.toFixed(2)}</span>
+                  </div>
+                </div>
+                <a href="extras.html" className="basket-cta">
+                  Continue to checkout
+                </a>
+              </div>
+            </div>
+            )}
+          </main>
+
+          {deleteConfirmPending && (() => {
+            const isAddon = deleteConfirmPending.type === 'addon' && deleteConfirmPending.key !== '_demo';
+            const isTour = deleteConfirmPending.type === 'tour';
+            const itemsToShow = [];
+            if (isAddon && addOns[deleteConfirmPending.key]) {
+              const item = addOns[deleteConfirmPending.key];
+              itemsToShow.push({
+                title: item.title,
+                meta: `${item.quantity} item${Number(item.quantity) !== 1 ? 's' : ''}`,
+                image: item.image || ADD_ON_IMAGES[deleteConfirmPending.key] || '/assets/placeholder-stadium.jpg',
+              });
+            } else if (isTour && booking) {
+              const fromBreakdown = (booking.priceBreakdown?.items || []).reduce((sum, item) => {
+                const m = (item.text || '').match(/^(\d+)/);
+                return sum + (m ? parseInt(m[1], 10) : 0);
+              }, 0);
+              const tourParticipantCount = Number(booking.participantTotal) || fromBreakdown || 1;
+              itemsToShow.push({
+                title: booking.tourTitle || 'Manchester City Stadium tour',
+                meta: `${tourParticipantCount} item${tourParticipantCount !== 1 ? 's' : ''}`,
+                image: '/assets/1.png',
+              });
+              addOnEntries.filter(([key, item]) => isTourAddOn(key) && (Number(item.quantity) || 0) > 0).forEach(([key, item]) => {
+                itemsToShow.push({
+                  title: item.title,
+                  meta: `${item.quantity} item${Number(item.quantity) !== 1 ? 's' : ''}`,
+                  image: item.image || ADD_ON_IMAGES[key] || '/assets/placeholder-stadium.jpg',
+                });
+              });
+            } else if (deleteConfirmPending.key === '_demo') {
+              itemsToShow.push({ title: 'Example item', meta: '1 item', image: '/assets/placeholder-stadium.jpg' });
+            }
+            return (
+              <div className="delete-confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title">
+                <div className="delete-confirm-overlay__backdrop" onClick={handleDeleteCancel} aria-hidden="true" />
+                <div className="delete-confirm-overlay__modal">
+                  <div className="delete-confirm-overlay__header">
+                    <h2 id="delete-confirm-title" className="delete-confirm-overlay__title">Remove item</h2>
+                    <button type="button" className="delete-confirm-overlay__close" aria-label="Close" onClick={handleDeleteCancel}>
+                      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 1l10 10M11 1L1 11" />
+                      </svg>
+                    </button>
+                  </div>
+                  <p className="delete-confirm-overlay__message">
+                    Are you sure you want to remove the following from the basket?
+                  </p>
+                  <div className="delete-confirm-overlay__items">
+                    {itemsToShow.map((row, idx) => (
+                      <div key={idx} className="delete-confirm-overlay__item">
+                        <div className="delete-confirm-overlay__item-thumb">
+                          <img src={row.image} alt="" />
+                        </div>
+                        <div className="delete-confirm-overlay__item-info">
+                          <p className="delete-confirm-overlay__item-title">{row.title}</p>
+                          <p className="delete-confirm-overlay__item-meta">{row.meta}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="delete-confirm-overlay__actions">
+                    <button type="button" className="delete-confirm-overlay__btn delete-confirm-overlay__btn--remove" onClick={handleDeleteConfirm}>
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
