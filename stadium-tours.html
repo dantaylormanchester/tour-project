@@ -87,6 +87,7 @@
       font-stretch: condensed;
       font-display: swap;
     }
+  </style>
   <style>
     * {
       margin: 0;
@@ -105,6 +106,7 @@
       --color-content-status-success: #0d775d;
       --color-bg-default: #ffffff;
       --color-bg-base-white: #ffffff;
+      --color-bg-page: #ffffff;
       --color-bg-core-secondary: #98c5e9;
       --color-bg-subtle-primary: #eef5fc;
       --color-bg-action-transparent: rgba(255, 255, 255, 0);
@@ -181,7 +183,7 @@
       font-family: var(--font-family);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      background-color: var(--color-bg-default);
+      background-color: var(--color-bg-page);
       color: var(--color-content-primary);
       overflow-x: hidden;
       width: 375px;
@@ -200,7 +202,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background-color: var(--color-bg-base-white);
+      background-color: var(--color-bg-page);
       width: 375px;
       max-width: 375px;
       margin: 0 auto;
@@ -534,13 +536,44 @@
 
     .badge--small {
       background-color: var(--color-bg-subtle-primary);
-      padding: var(--spacing-1) var(--spacing-3);
-      height: 24px;
+      padding: var(--spacing-2) var(--spacing-4);
+      height: 28px;
+      border-radius: var(--border-radius-round);
     }
 
     .badge--small .badge__text {
       font-size: var(--font-size-label-small);
       color: var(--color-content-core-primary);
+    }
+
+    .badge--popular {
+      background-color: var(--color-city-electric-blue);
+      padding: var(--spacing-2) var(--spacing-4);
+      height: 28px;
+      border-radius: var(--border-radius-round);
+      color: var(--color-content-primary);
+    }
+
+    .badge--popular .badge__text {
+      font-size: var(--font-size-label-small);
+      font-weight: 500;
+      color: var(--color-content-primary);
+    }
+
+    .badge--popular .badge__icon svg {
+      color: inherit;
+    }
+
+    .badge--duration {
+      background-color: var(--color-border-disabled);
+      padding: var(--spacing-2) var(--spacing-4);
+      height: 28px;
+      border-radius: var(--border-radius-round);
+    }
+
+    .badge--duration .badge__text {
+      font-size: var(--font-size-label-small);
+      color: var(--color-content-primary);
     }
 
     .divider {
@@ -765,25 +798,24 @@
       gap: var(--spacing-6);
       padding: var(--spacing-6);
       background-color: var(--color-bg-default);
-      border: var(--border-width-xsmall) solid var(--color-border-default);
+      border: 1px solid var(--color-border-default);
       border-radius: var(--border-radius-xlarge);
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
       margin-bottom: 0;
       align-self: center;
-      transition: border 0.2s ease;
     }
 
     .tour-card--expanded {
-      border: var(--border-width-medium) solid var(--color-border-status-info);
+      border: 1px solid var(--color-border-default);
     }
 
     .tour-card__image {
       width: 100%;
       border-radius: var(--border-radius-medium);
       overflow: hidden;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 311 / 194;
       position: relative;
     }
 
@@ -797,7 +829,7 @@
     .tour-card__content {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-6);
+      gap: var(--spacing-5);
       width: 100%;
     }
 
@@ -811,49 +843,7 @@
     .tour-card__inner {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-2);
-      width: 100%;
-    }
-
-    .tour-card__title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-4);
-      width: 100%;
-    }
-
-    .tour-card__title-row .tour-card__title {
-      flex: 1;
-      margin: 0;
-    }
-
-    .tour-card__expand-btn {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: var(--color-content-primary);
-    }
-
-    .tour-card__expand-btn svg {
-      transition: transform 0.2s ease;
-    }
-
-    .tour-card__expand-btn[aria-expanded="true"] svg {
-      transform: rotate(180deg);
-    }
-
-    .tour-card__header {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-5);
+      gap: var(--spacing-3);
       width: 100%;
     }
 
@@ -863,19 +853,36 @@
       align-items: center;
     }
 
+    .tour-card__title-row .tour-card__title {
+      flex: 1;
+      margin: 0;
+    }
+
+    .tour-card__title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--spacing-4);
+      width: 100%;
+    }
+
     .tour-card__title {
-      font-size: var(--font-size-body-large);
-      font-weight: 700;
-      line-height: var(--line-height-body-large);
+      font-family: var(--font-family);
+      font-size: 48px;
+      font-weight: 800;
+      font-stretch: condensed;
+      font-style: italic;
+      line-height: 48px;
+      letter-spacing: -0.48px;
       color: var(--color-content-primary);
       margin: 0;
     }
 
     .tour-card__price {
-      font-size: var(--font-size-body-xsmall);
+      font-size: var(--font-size-body-medium);
       font-weight: 400;
-      line-height: var(--line-height-body-xsmall);
-      color: var(--color-content-tertiary);
+      line-height: var(--line-height-body-medium);
+      color: var(--color-content-secondary);
       margin: 0;
     }
 
@@ -883,21 +890,65 @@
       font-size: var(--font-size-body-small);
       font-weight: 400;
       line-height: var(--line-height-body-small);
-      color: var(--color-content-secondary);
+      color: var(--color-content-primary);
       margin: 0;
+    }
+
+    .tour-card__view-more {
+      font-size: var(--font-size-body-small);
+      font-weight: 500;
+      color: var(--color-content-core-primary);
+      text-decoration: underline;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tour-card__description-expanded {
+      margin-top: var(--spacing-2);
+    }
+
+    .tour-card__price strong {
+      font-weight: 700;
+      color: var(--color-content-primary);
+    }
+
+    .tour-card__title--uppercase {
+      text-transform: uppercase;
     }
 
     .tour-card__button {
       width: 100%;
-      height: var(--button-height-small);
-      padding: var(--spacing-4) var(--spacing-5);
-      background-color: var(--color-bg-action-transparent);
+      height: 44px;
+      min-height: 44px;
+      padding: 12px var(--spacing-6);
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-2);
+      background-color: var(--color-bg-default);
       border: var(--border-width-xsmall) solid var(--color-border-action-default);
       border-radius: var(--border-radius-medium);
-      font-size: var(--font-size-cta-small);
+      font-size: var(--font-size-body-small);
       font-weight: 700;
+      line-height: var(--line-height-body-xsmall);
       color: var(--color-content-primary);
       cursor: pointer;
+    }
+
+    .tour-card__button--dark {
+      background-color: var(--color-content-primary);
+      border-color: var(--color-content-primary);
+      color: var(--color-content-on-dark);
+    }
+
+    .tour-card__collapsed-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
     }
 
     .widget-divider {
@@ -1362,75 +1413,22 @@
     .tour-card__times-wrapper--expanded {
       max-height: 1000px;
       transition: max-height 0.4s ease-in;
+      overflow: visible;
+      margin-top: var(--spacing-2);
     }
 
     .tour-card__times-section {
       display: flex;
       flex-direction: column;
       gap: 2px;
-      margin-top: var(--spacing-5);
-      padding: var(--spacing-6);
-      background-color: var(--color-bg-subtle-primary);
-      border: var(--border-width-xsmall) solid var(--color-border-subtle);
-      border-radius: var(--border-radius-large);
-    }
-
-    .tour-card__availability {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-3);
-    }
-
-    .tour-card__availability-label {
-      font-size: var(--font-size-body-small);
-      font-weight: 500;
-      line-height: var(--line-height-body-small);
-      color: var(--color-content-primary);
-    }
-
-    .tour-card__availability-badges {
-      display: flex;
-      gap: var(--spacing-5);
-    }
-
-    .tour-card__availability-badge {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-2);
-    }
-
-    .tour-card__availability-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .tour-card__availability-indicator--good {
-      background-color: #6FCF97;
-    }
-
-    .tour-card__availability-indicator--low {
-      background-color: #F2994A;
-    }
-
-    .tour-card__availability-indicator--none {
-      background-color: #BDBDBD;
-    }
-
-    .tour-card__availability-text {
-      font-size: var(--font-size-label-medium);
-      font-weight: 500;
-      line-height: var(--line-height-label-medium);
-      color: var(--color-content-primary);
-      letter-spacing: 0.14px;
+      padding: 0;
+      width: 100%;
     }
 
     .tour-card__time-selection {
       display: flex;
       flex-direction: column;
       gap: var(--spacing-4);
-      margin-top: var(--spacing-6);
     }
 
     .tour-card__time-selection-label {
@@ -1503,6 +1501,10 @@
     }
 
     .tour-card__time-dropdown-option:hover {
+      background-color: var(--color-bg-subtle-primary);
+    }
+
+    .tour-card__time-dropdown-option--selected {
       background-color: var(--color-bg-subtle-primary);
     }
 
@@ -1592,10 +1594,10 @@
       background-color: #BDBDBD;
     }
 
+    /* Booking summary – Figma participants/people: row of text, line underneath, gap 8 */
     .tour-card__booking-summary {
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+      flex-direction: column;
       width: 100%;
       margin-top: var(--spacing-6);
     }
@@ -1603,21 +1605,65 @@
     .tour-card__price-breakdown {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      width: 100%;
     }
 
-    .tour-card__price-item-text {
-      font-size: var(--font-size-body-xxsmall);
-      font-weight: 500;
-      line-height: var(--line-height-body-xxsmall);
+    /* Each row: text + line underneath. Figma participants section: 48px height, gap 8, padding 20 */
+    .tour-card__price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: var(--spacing-4);
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--color-border-default);
+    }
+
+    .tour-card__price-row:first-child {
+      padding-top: 0;
+    }
+
+    /* Line item label: participant count only, 14px, 400, tertiary */
+    .tour-card__price-row-label {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
       color: var(--color-content-tertiary);
     }
 
-    .tour-card__total-price {
-      font-size: var(--font-size-body-large);
+    /* Line item value: price amount, 14px, 400, tertiary (Figma) */
+    .tour-card__price-row-value {
+      font-size: var(--font-size-body-small);
+      font-weight: 400;
+      line-height: var(--line-height-body-small);
+      color: var(--color-content-tertiary);
+    }
+
+    .tour-card__price-row--total {
+      margin-top: var(--spacing-4);
+      padding-top: var(--spacing-4);
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    /* Total: 15px, 700, both primary */
+    .tour-card__price-row--total .tour-card__price-row-label,
+    .tour-card__price-row--total .tour-card__price-row-value {
+      font-size: var(--font-size-body-medium);
       font-weight: 700;
-      line-height: var(--line-height-body-large);
+      line-height: var(--line-height-body-medium);
       color: var(--color-content-primary);
+    }
+
+    .tour-card__action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      margin-top: 14px;
+    }
+
+    .tour-card__action-buttons .tour-card__book-button {
+      margin-top: 0;
     }
 
     .tour-card__book-button {
@@ -2385,9 +2431,12 @@
       const initialSelectedTab = selectedDate ? formatDateForTab(selectedDate) : (tabLabels[Math.floor(tabLabels.length / 2)] || '');
       const [selectedTab, setSelectedTab] = useState(initialSelectedTab);
       const [expandedTour, setExpandedTour] = useState(null);
+      const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
       const [selectedTimeByTour, setSelectedTimeByTour] = useState({});
       const [showTimeAlertByTour, setShowTimeAlertByTour] = useState({});
+      const [openTimeDropdownForTour, setOpenTimeDropdownForTour] = useState(null);
       const activeTabRef = useRef(null);
+      const timeDropdownRefs = useRef({});
 
       const handleBookNowClick = (tour) => {
         const tourId = tour.id;
@@ -2417,7 +2466,11 @@
           if (count > 0) {
             const lineTotal = count * type.price;
             const label = count === 1 ? type.label : type.plural;
-            acc.items.push({ text: `${count} ${label} x £${lineTotal.toFixed(2)}`, lineTotal });
+            acc.items.push({
+              label: `${count} ${label}`,
+              value: `£${lineTotal.toFixed(2)}`,
+              lineTotal
+            });
             acc.total += lineTotal;
           }
           return acc;
@@ -2465,47 +2518,57 @@
       const allTours = [
         {
           id: 1,
-          title: 'Manchester City Stadium tour',
-          price: 'From £26 per person',
-          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          title: 'The Manchester City Stadium Tour',
+          price: 'From £26 per adult (off-peak)',
+          priceBold: '£26',
+          description: 'Visit areas of the Etihad Stadium not usually available to the public with a professional guide.',
+          expandedContent: "You'll explore the home and away dressing rooms, walk through the players' tunnel, and take in the pitchside views from the dugout. The tour also includes access to the press room and executive areas. Wheelchair accessible. Duration approximately 3 hours.",
           image: '/assets/3.JPG',
-          badges: ['Most popular', '120 mins'],
+          badges: [{ type: 'duration', text: '3 hours' }, { type: 'popular' }],
           times: ['09:00', '09:30', '10:30', '11:30', '12:00', '13:30', '15:00', '15:30', '16:00', '16:30']
         },
         {
           id: 2,
           title: 'Stadium and Academy Tour',
-          price: 'From £26 per person',
-          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          price: 'From £26 per adult (off-peak)',
+          priceBold: '£26',
+          description: 'Visit areas of the Etihad Stadium not usually available to the public with a professional guide.',
+          expandedContent: "This combined tour takes you behind the scenes at the Etihad and the City Football Academy. See where first-team players train, visit the academy pitches, and learn about our youth development programme.",
           image: '/assets/1.png',
-          badges: ['120 mins'],
+          badges: [{ type: 'duration', text: '3 hours' }],
           times: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
         },
         {
           id: 3,
           title: 'VIP Stadium Tour',
-          price: 'From £26 per person',
-          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          price: 'From £26 per adult (off-peak)',
+          priceBold: '£26',
+          description: 'Visit areas of the Etihad Stadium not usually available to the public with a professional guide.',
+          expandedContent: "Enjoy an exclusive behind-the-scenes experience with access to premium areas including the directors' lounge, first-team tunnel, and pitchside. Includes refreshments.",
           image: '/assets/4.jpg.webp',
-          badges: ['120 mins'],
+          badges: [{ type: 'duration', text: '3 hours' }],
           times: ['09:30', '10:30', '11:30', '12:30', '13:30', '14:00', '15:00', '16:00', '17:00']
         },
         {
           id: 4,
           title: 'Walk with a Legend Tour',
-          price: 'From £26 per person',
-          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          price: 'From £26 per adult (off-peak)',
+          priceBold: '£26',
+          description: 'Visit areas of the Etihad Stadium not usually available to the public with a professional guide.',
+          expandedContent: "Be guided by a Manchester City legend who shares personal stories and memories from their playing days. Includes photo opportunities and autograph sessions.",
           image: '/assets/2.png',
-          badges: ['120 mins'],
+          badges: [{ type: 'duration', text: '3 hours' }],
           times: ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '16:30', '17:00']
         },
         {
           id: 5,
           title: 'Matchday Pitch-side Walking Tour',
-          price: 'From £26 per person',
-          description: 'Exclusive combined tour of the Etihad Stadium and the City Football Academy.',
+          price: 'From £26 per adult (off-peak)',
+          priceBold: '£26',
+          description: 'Visit areas of the Etihad Stadium not usually available to the public with a professional guide.',
+          expandedContent: "Experience the matchday atmosphere with a pitchside walk and access to areas only open on game days. Subject to fixture schedule and may be suspended during high-profile matches.",
           image: '/assets/1.png',
-          badges: ['120 mins'],
+          badges: [{ type: 'duration', text: '3 hours' }],
           times: ['09:00', '09:30', '10:30', '11:30', '12:00', '13:00', '14:30', '15:30', '16:30', '17:00']
         }
       ];
@@ -2549,9 +2612,22 @@
         setExpandedTour(expandedTour === tourId ? null : tourId);
       };
 
+      useEffect(() => {
+        const handleClickOutside = (e) => {
+          if (openTimeDropdownForTour === null) return;
+          const ref = timeDropdownRefs.current[openTimeDropdownForTour];
+          if (ref && !ref.contains(e.target)) {
+            setOpenTimeDropdownForTour(null);
+          }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+      }, [openTimeDropdownForTour]);
+
       const selectTime = (tourId, timeString) => {
         setSelectedTimeByTour(prev => ({ ...prev, [tourId]: timeString }));
         setShowTimeAlertByTour(prev => ({ ...prev, [tourId]: false }));
+        setOpenTimeDropdownForTour(null);
       };
 
       const priceBreakdown = getPriceBreakdown();
@@ -2583,88 +2659,112 @@
                 <div className="tour-card__content">
                   <div className="tour-card__top">
                     <div className="tour-card__inner">
-                      <div className="tour-card__title-row">
-                        <h3 className="tour-card__title">{tour.title}</h3>
-                        <button
-                          type="button"
-                          className="tour-card__expand-btn"
-                          onClick={() => toggleTimes(tour.id)}
-                          aria-expanded={expandedTour === tour.id}
-                          aria-label={expandedTour === tour.id ? 'Collapse' : 'Expand'}
-                        >
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M7 10l5 5 5-5"/>
-                          </svg>
-                        </button>
-                      </div>
-                      <p className="tour-card__price">{tour.price}</p>
                       <div className="tour-card__badges">
                         {tour.badges.map((badge, index) => (
-                          <div key={index} className="badge badge--small">
-                            <span className="badge__text">{badge}</span>
-                          </div>
+                          badge.type === 'popular' ? (
+                            <div key={index} className="badge badge--popular">
+                              <span className="badge__icon" aria-hidden="true">
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 8.5 3.5 10.5l.5-3.5L1.5 4.5l3.5-.5L6 1z"/></svg>
+                              </span>
+                              <span className="badge__text">Popular</span>
+                            </div>
+                          ) : (
+                            <div key={index} className="badge badge--duration">
+                              <span className="badge__text">{badge.text}</span>
+                            </div>
+                          )
                         ))}
                       </div>
+                      <h3 className="tour-card__title tour-card__title--uppercase">{tour.title}</h3>
+                      <p className="tour-card__price">From <strong>{tour.priceBold || '£26'}</strong> per adult (off-peak)</p>
                     </div>
                     <p className="tour-card__description">
                       {tour.description}
+                      {expandedDescriptionId === tour.id && tour.expandedContent && (
+                        <span className="tour-card__description-expanded"> {tour.expandedContent}</span>
+                      )}
+                      {' '}
+                      <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === tour.id ? null : tour.id)}>
+                        {expandedDescriptionId === tour.id ? 'Show less' : 'View more'}
+                      </button>
                     </p>
                   </div>
 
-                  <button className="tour-card__button" onClick={() => onMoreInfoClick(tour.title, tour.image)}>More info</button>
+                  {expandedTour !== tour.id && (
+                    <div className="tour-card__collapsed-buttons">
+                      <button className="tour-card__button" onClick={() => onMoreInfoClick(tour.title, tour.image)}>
+                        Find out more
+                      </button>
+                      <button
+                        type="button"
+                        className="tour-card__button tour-card__button--dark"
+                        onClick={() => toggleTimes(tour.id)}
+                        aria-expanded={false}
+                      >
+                        Show times
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M7 10l5 5 5-5"/>
+                        </svg>
+                      </button>
+                    </div>
+                  )}
                   
                   <div className={`tour-card__times-wrapper ${expandedTour === tour.id ? 'tour-card__times-wrapper--expanded' : ''}`}>
                     <div className="tour-card__times-section">
-                      <div className="tour-card__availability">
-                        <span className="tour-card__availability-label">Availability:</span>
-                        <div className="tour-card__availability-badges">
-                          <div className="tour-card__availability-badge">
-                            <span className="tour-card__availability-indicator tour-card__availability-indicator--good" aria-hidden="true" />
-                            <span className="tour-card__availability-text">Good</span>
-                          </div>
-                          <div className="tour-card__availability-badge">
-                            <span className="tour-card__availability-indicator tour-card__availability-indicator--low" aria-hidden="true" />
-                            <span className="tour-card__availability-text">Low</span>
-                          </div>
-                          <div className="tour-card__availability-badge">
-                            <span className="tour-card__availability-indicator tour-card__availability-indicator--none" aria-hidden="true" />
-                            <span className="tour-card__availability-text">None</span>
-                          </div>
-                        </div>
-                      </div>
                       <div className="tour-card__time-selection">
                         <p className="tour-card__time-selection-label">Select a time:</p>
-                        <div className="tour-card__times" role="group" aria-label="Time slots">
-                          {getAllTimeSlotsForTour(tour).map(({ time, availability }) => {
-                            const isSelected = selectedTimeByTour[tour.id] === time;
-                            const isNone = availability === 'none';
-                            return (
-                              <button
-                                key={time}
-                                type="button"
-                                className={`tour-card__time-slot tour-card__time-slot--${availability} ${isSelected ? 'tour-card__time-slot--selected' : ''}`}
-                                onClick={() => !isNone && selectTime(tour.id, time)}
-                                disabled={isNone}
-                                aria-pressed={isSelected}
-                                aria-label={`${time}${isNone ? ', not available' : ''}`}
-                              >
-                                <span className={`tour-card__time-indicator tour-card__time-indicator--${availability}`} aria-hidden="true" />
-                                <span>{time}</span>
-                              </button>
-                            );
-                          })}
+                        <div
+                          className="tour-card__time-dropdown-wrapper"
+                          ref={el => timeDropdownRefs.current[tour.id] = el}
+                        >
+                          <button
+                            type="button"
+                            className="tour-card__time-dropdown-trigger"
+                            onClick={() => setOpenTimeDropdownForTour(openTimeDropdownForTour === tour.id ? null : tour.id)}
+                            aria-expanded={openTimeDropdownForTour === tour.id}
+                            aria-haspopup="listbox"
+                            aria-label="Select a time"
+                          >
+                            {selectedTimeByTour[tour.id] || 'Select a time'}
+                          </button>
+                          {openTimeDropdownForTour === tour.id && (
+                            <div className="tour-card__time-dropdown-panel" role="listbox" aria-label="Time slots">
+                              {getAvailableTimeSlotsForTour(tour).map(({ time, availability }) => {
+                                const isSelected = selectedTimeByTour[tour.id] === time;
+                                return (
+                                  <button
+                                    key={time}
+                                    type="button"
+                                    role="option"
+                                    aria-selected={isSelected}
+                                    className={`tour-card__time-dropdown-option ${isSelected ? 'tour-card__time-dropdown-option--selected' : ''}`}
+                                    onClick={() => selectTime(tour.id, time)}
+                                  >
+                                    <span>{time}</span>
+                                    {availability === 'low' && (
+                                      <span className="tour-card__low-availability-badge">Low availability</span>
+                                    )}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          )}
                         </div>
                       </div>
                       
                       <div className="tour-card__booking-summary">
                         <div className="tour-card__price-breakdown">
                           {priceBreakdown.items.map((item, idx) => (
-                            <div key={idx} className="tour-card__price-item">
-                              <span className="tour-card__price-item-text">{item.text}</span>
+                            <div key={idx} className="tour-card__price-row">
+                              <span className="tour-card__price-row-label">{item.label}</span>
+                              <span className="tour-card__price-row-value">{item.value}</span>
                             </div>
                           ))}
+                          <div className="tour-card__price-row tour-card__price-row--total">
+                            <span className="tour-card__price-row-label">Total</span>
+                            <span className="tour-card__price-row-value">£{priceBreakdown.total.toFixed(2)}</span>
+                          </div>
                         </div>
-                        <div className="tour-card__total-price">£{priceBreakdown.total.toFixed(2)}</div>
                       </div>
 
                       {showTimeAlertByTour[tour.id] && (
@@ -2679,12 +2779,17 @@
                         </div>
                       )}
                       
-                      <button 
-                        className="tour-card__book-button" 
-                        onClick={() => handleBookNowClick(tour)}
-                      >
-                        Book now
-                      </button>
+                      <div className="tour-card__action-buttons">
+                        <button className="tour-card__button" onClick={() => onMoreInfoClick(tour.title, tour.image)}>
+                          Find out more
+                        </button>
+                        <button 
+                          className="tour-card__book-button" 
+                          onClick={() => handleBookNowClick(tour)}
+                        >
+                          Book now
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -2719,6 +2824,7 @@
       const [addonQuantityShown, setAddonQuantityShown] = useState({});
       const [addonQuantities, setAddonQuantities] = useState({ 'photo-booklet': 1, 'photo-booklets-4': 1, 'guidebook': 1 });
       const [addonQuantityOpen, setAddonQuantityOpen] = useState(null);
+      const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
       const addonQuantityRef = useRef(null);
       const computeBasketCount = () => {
         try {
@@ -3148,7 +3254,7 @@
             {/* Tour Cards */}
             {!showAvailableTours && (
               <>
-            {/* Tour Card 1: Manchester City Stadium tour */}
+            {/* Tour Card 1: Manchester City Stadium tour - Figma 6427-157783 */}
             <div className="tour-card">
               <div className="tour-card__image">
                 <img src="/assets/3.JPG" alt="Manchester City Stadium tour" />
@@ -3156,23 +3262,34 @@
               <div className="tour-card__content">
                 <div className="tour-card__top">
                   <div className="tour-card__inner">
-                    <h3 className="tour-card__title">Manchester City Stadium tour</h3>
-                    <p className="tour-card__price">From £26 per person</p>
                     <div className="tour-card__badges">
-                      <div className="badge badge--small">
-                        <span className="badge__text">Most popular</span>
+                      <div className="badge badge--duration">
+                        <span className="badge__text">3 hours</span>
                       </div>
-                      <div className="badge badge--small">
-                        <span className="badge__text">120 mins</span>
+                      <div className="badge badge--popular">
+                        <span className="badge__icon" aria-hidden="true">
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 1l1.5 3 3.5.5-2.5 2.5.5 3.5L6 8.5 3.5 10.5l.5-3.5L1.5 4.5l3.5-.5L6 1z"/></svg>
+                        </span>
+                        <span className="badge__text">Popular</span>
                       </div>
                     </div>
+                    <h3 className="tour-card__title tour-card__title--uppercase">The Manchester City Stadium Tour</h3>
+                    <p className="tour-card__price">From <strong>£26</strong> per adult (off-peak)</p>
                   </div>
                   <p className="tour-card__description">
-                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                    Visit areas of the Etihad Stadium not usually available to the public with a professional guide.
+                    {expandedDescriptionId === 'manchester-city' && (
+                      <span className="tour-card__description-expanded"> You&apos;ll explore the home and away dressing rooms, walk through the players&apos; tunnel, and take in the pitchside views from the dugout. The tour also includes access to the press room and executive areas. Wheelchair accessible. Duration approximately 3 hours.</span>
+                    )}
+                    {' '}
+                    <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === 'manchester-city' ? null : 'manchester-city')}>
+                      {expandedDescriptionId === 'manchester-city' ? 'Show less' : 'View more'}
+                    </button>
                   </p>
                 </div>
-
-                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Manchester City Stadium tour'); setInfoSheetImage('/assets/3.JPG'); setInfoSheetOpen(true); }}>More info</button>
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Manchester City Stadium tour'); setInfoSheetImage('/assets/3.JPG'); setInfoSheetOpen(true); }}>
+                  Find out more
+                </button>
               </div>
             </div>
 
@@ -3184,20 +3301,28 @@
               <div className="tour-card__content">
                 <div className="tour-card__top">
                   <div className="tour-card__inner">
-                    <h3 className="tour-card__title">Stadium and Academy Tour</h3>
-                    <p className="tour-card__price">From £26 per person</p>
                     <div className="tour-card__badges">
-                      <div className="badge badge--small">
-                        <span className="badge__text">120 mins</span>
+                      <div className="badge badge--duration">
+                        <span className="badge__text">3 hours</span>
                       </div>
                     </div>
+                    <h3 className="tour-card__title tour-card__title--uppercase">Stadium and Academy Tour</h3>
+                    <p className="tour-card__price">From <strong>£26</strong> per adult (off-peak)</p>
                   </div>
                   <p className="tour-card__description">
-                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                    Visit areas of the Etihad Stadium not usually available to the public with a professional guide.
+                    {expandedDescriptionId === 'stadium-academy' && (
+                      <span className="tour-card__description-expanded"> This combined tour takes you behind the scenes at the Etihad and the City Football Academy. See where first-team players train, visit the academy pitches, and learn about our youth development programme.</span>
+                    )}
+                    {' '}
+                    <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === 'stadium-academy' ? null : 'stadium-academy')}>
+                      {expandedDescriptionId === 'stadium-academy' ? 'Show less' : 'View more'}
+                    </button>
                   </p>
                 </div>
-
-                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Stadium and Academy Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>More info</button>
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Stadium and Academy Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>
+                  Find out more
+                </button>
               </div>
             </div>
 
@@ -3209,20 +3334,28 @@
               <div className="tour-card__content">
                 <div className="tour-card__top">
                   <div className="tour-card__inner">
-                    <h3 className="tour-card__title">VIP Stadium Tour</h3>
-                    <p className="tour-card__price">From £26 per person</p>
                     <div className="tour-card__badges">
-                      <div className="badge badge--small">
-                        <span className="badge__text">120 mins</span>
+                      <div className="badge badge--duration">
+                        <span className="badge__text">3 hours</span>
                       </div>
                     </div>
+                    <h3 className="tour-card__title tour-card__title--uppercase">VIP Stadium Tour</h3>
+                    <p className="tour-card__price">From <strong>£26</strong> per adult (off-peak)</p>
                   </div>
                   <p className="tour-card__description">
-                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                    Visit areas of the Etihad Stadium not usually available to the public with a professional guide.
+                    {expandedDescriptionId === 'vip' && (
+                      <span className="tour-card__description-expanded"> Enjoy an exclusive behind-the-scenes experience with access to premium areas including the directors&apos; lounge, first-team tunnel, and pitchside. Includes refreshments.</span>
+                    )}
+                    {' '}
+                    <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === 'vip' ? null : 'vip')}>
+                      {expandedDescriptionId === 'vip' ? 'Show less' : 'View more'}
+                    </button>
                   </p>
                 </div>
-
-                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('VIP Stadium Tour'); setInfoSheetImage('/assets/4.jpg.webp'); setInfoSheetOpen(true); }}>More info</button>
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('VIP Stadium Tour'); setInfoSheetImage('/assets/4.jpg.webp'); setInfoSheetOpen(true); }}>
+                  Find out more
+                </button>
               </div>
             </div>
 
@@ -3234,20 +3367,28 @@
               <div className="tour-card__content">
                 <div className="tour-card__top">
                   <div className="tour-card__inner">
-                    <h3 className="tour-card__title">Walk with a Legend Tour</h3>
-                    <p className="tour-card__price">From £26 per person</p>
                     <div className="tour-card__badges">
-                      <div className="badge badge--small">
-                        <span className="badge__text">120 mins</span>
+                      <div className="badge badge--duration">
+                        <span className="badge__text">3 hours</span>
                       </div>
                     </div>
+                    <h3 className="tour-card__title tour-card__title--uppercase">Walk with a Legend Tour</h3>
+                    <p className="tour-card__price">From <strong>£26</strong> per adult (off-peak)</p>
                   </div>
                   <p className="tour-card__description">
-                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                    Visit areas of the Etihad Stadium not usually available to the public with a professional guide.
+                    {expandedDescriptionId === 'walk-legend' && (
+                      <span className="tour-card__description-expanded"> Be guided by a Manchester City legend who shares personal stories and memories from their playing days. Includes photo opportunities and autograph sessions.</span>
+                    )}
+                    {' '}
+                    <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === 'walk-legend' ? null : 'walk-legend')}>
+                      {expandedDescriptionId === 'walk-legend' ? 'Show less' : 'View more'}
+                    </button>
                   </p>
                 </div>
-
-                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Walk with a Legend Tour'); setInfoSheetImage('/assets/2.png'); setInfoSheetOpen(true); }}>More info</button>
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Walk with a Legend Tour'); setInfoSheetImage('/assets/2.png'); setInfoSheetOpen(true); }}>
+                  Find out more
+                </button>
               </div>
             </div>
 
@@ -3259,20 +3400,28 @@
               <div className="tour-card__content">
                 <div className="tour-card__top">
                   <div className="tour-card__inner">
-                    <h3 className="tour-card__title">Matchday Pitch-side Walking Tour</h3>
-                    <p className="tour-card__price">From £26 per person</p>
                     <div className="tour-card__badges">
-                      <div className="badge badge--small">
-                        <span className="badge__text">120 mins</span>
+                      <div className="badge badge--duration">
+                        <span className="badge__text">3 hours</span>
                       </div>
                     </div>
+                    <h3 className="tour-card__title tour-card__title--uppercase">Matchday Pitch-side Walking Tour</h3>
+                    <p className="tour-card__price">From <strong>£26</strong> per adult (off-peak)</p>
                   </div>
                   <p className="tour-card__description">
-                    Exclusive combined tour of the Etihad Stadium and the City Football Academy.
+                    Visit areas of the Etihad Stadium not usually available to the public with a professional guide.
+                    {expandedDescriptionId === 'matchday' && (
+                      <span className="tour-card__description-expanded"> Experience the matchday atmosphere with a pitchside walk and access to areas only open on game days. Subject to fixture schedule and may be suspended during high-profile matches.</span>
+                    )}
+                    {' '}
+                    <button type="button" className="tour-card__view-more" onClick={() => setExpandedDescriptionId(expandedDescriptionId === 'matchday' ? null : 'matchday')}>
+                      {expandedDescriptionId === 'matchday' ? 'Show less' : 'View more'}
+                    </button>
                   </p>
                 </div>
-
-                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Matchday Pitch-side Walking Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>More info</button>
+                <button className="tour-card__button" onClick={() => { setInfoSheetTitle('Matchday Pitch-side Walking Tour'); setInfoSheetImage('/assets/1.png'); setInfoSheetOpen(true); }}>
+                  Find out more
+                </button>
               </div>
             </div>
               </>

@@ -639,11 +639,6 @@
     }
 
     /* Add to basket – slide-up drawer (same background as loading spinner) */
-    @keyframes add-to-basket-backdrop-fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
     .add-to-basket-drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -654,7 +649,12 @@
       backdrop-filter: blur(var(--blur-xsmall));
       -webkit-backdrop-filter: blur(var(--blur-xsmall));
       cursor: pointer;
-      animation: add-to-basket-backdrop-fade-in 800ms ease-out forwards;
+      opacity: 0;
+      transition: opacity 200ms ease-in;
+    }
+
+    .add-to-basket-drawer-backdrop--visible {
+      opacity: 1;
     }
 
     .add-to-basket-drawer {
@@ -1111,7 +1111,7 @@
 
             {showAddToBasketDrawer && addedCard && (
               <>
-                <div className="add-to-basket-drawer-backdrop" aria-hidden="true" onClick={() => setShowAddToBasketDrawer(false)} />
+                <div className={`add-to-basket-drawer-backdrop ${drawerSlideOpen ? 'add-to-basket-drawer-backdrop--visible' : ''}`} aria-hidden="true" onClick={() => setShowAddToBasketDrawer(false)} />
                 <div className={`add-to-basket-drawer ${drawerSlideOpen ? 'add-to-basket-drawer--open' : ''}`} role="dialog" aria-modal="true" aria-label="Added to basket">
                   <div className="add-to-basket-drawer__panel">
                     <div className="add-to-basket-drawer__header">
